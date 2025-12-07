@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/jobperhour/",            // Base public path
+  base: "/",            // Base public path
   server: {
     port: 5173,            // Frontend dev port
     strictPort: true,      // Fail if port 5173 is busy
