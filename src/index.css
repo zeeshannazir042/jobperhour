@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+.nav-item {
+  @apply px-3 py-2 rounded-lg hover:bg-orange-100 hover:text-orange-600 transition font-medium;
+}
+
+.lang-button {
+  @apply px-2 py-1 text-sm hover:bg-gray-200;
+}
+
+.mobile-link {
+  @apply block px-3 py-2 rounded hover:bg-orange-100 transition;
+}
+.menu-item {
+  display: block;
+  padding: 0.6rem;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+.menu-item:hover {
+  background: rgba(255,130,0,0.15);
+  color: #ff7b00;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn { animation: fadeIn .3s ease-out; }

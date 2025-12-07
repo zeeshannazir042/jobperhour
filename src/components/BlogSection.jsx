@@ -1,10 +1,8 @@
 import React from "react";
 import BlogCard from "./BlogCard";
 
-// Import your local images
 import blog1Img from "../assets/images/Blogs/student.jpg";
 import blog2Img from "../assets/images/Blogs/visa.jpg";
-import blog3Img from "../assets/images/Blogs/guide.jpg";
 import blog4Img from "../assets/images/Blogs/advice.jpg";
 
 const blogPosts = [
@@ -14,7 +12,7 @@ const blogPosts = [
     date: "31.10.2025",
     author: "Admin",
     excerpt:
-      "Discover the top hourly jobs suitable for students in Berlin — from hospitality, tutoring, delivery, and office work. Learn how to balance study and work effectively.",
+      "Discover the top hourly jobs suitable for students in Berlin — from hospitality, tutoring, delivery, and office work.",
     image: blog1Img,
     link: "/blog/hourly-jobs-students-berlin",
   },
@@ -24,19 +22,9 @@ const blogPosts = [
     date: "20.10.2025",
     author: "Admin",
     excerpt:
-      "Learn how international students and non-German speakers can find highly paid hourly jobs in Berlin and understand visa & work regulations.",
+      "Learn how international students can legally work, earn, and find hourly jobs without hassle.",
     image: blog2Img,
     link: "/blog/visa-work-options",
-  },
-  {
-    category: "Tips & Guides",
-    title: "Top Apps to Find Micro-Jobs in Berlin",
-    date: "15.09.2025",
-    author: "Admin",
-    excerpt:
-      "A list of must-have apps for students and locals to find flexible, hourly jobs in Berlin — from delivery to tutoring and creative gigs.",
-    image: blog3Img,
-    link: "/blog/top-apps-micro-jobs",
   },
   {
     category: "Career Advice",
@@ -44,7 +32,7 @@ const blogPosts = [
     date: "05.09.2025",
     author: "Admin",
     excerpt:
-      "Tips and strategies for students to manage hourly jobs while keeping up with academic commitments — stay productive and stress-free.",
+      "Learn how to manage college life while earning money—without burning out.",
     image: blog4Img,
     link: "/blog/balancing-study-work",
   },
@@ -52,20 +40,45 @@ const blogPosts = [
 
 const BlogSection = () => {
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-orange-500 mb-6">
+    <section className="relative py-24 overflow-hidden bg-[#0e0e0e]">
+      {/* Background Glow */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[400px] h-[400px] bg-orange-500 opacity-20 blur-[160px]"></div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Title */}
+        <h2 className="text-4xl font-bold text-center text-white mb-4">
           Read Our Blog
         </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto text-lg">
-          Helpful tips and guides for students and job seekers in Berlin. Explore hourly jobs, visa information, and opportunities for international students.
+
+        <div className="w-24 h-1 mx-auto bg-gradient-to-r from-orange-400 to-orange-600 rounded-full mb-8 animate-pulse"></div>
+
+        <p className="text-center text-gray-400 mb-14 max-w-3xl mx-auto text-lg leading-relaxed">
+          Helpful guides for job seekers, students, and newcomers in Berlin — stay updated and prepared.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        {/* Blog Cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {blogPosts.map((blog, index) => (
-            <BlogCard key={index} blog={blog} />
+            <div
+              key={index}
+              className="animate-slide-up opacity-0"
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
+              <BlogCard blog={blog} />
+            </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes slideUp {
+          0% { opacity: 0; transform: translateY(30px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up {
+          animation: slideUp .8s ease forwards;
+        }
+      `}</style>
     </section>
   );
 };

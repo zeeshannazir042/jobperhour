@@ -1,160 +1,195 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/Images/Homepage/logo.png"; // <-- adjust path to your logo
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
+import logo from "../../assets/Images/Homepage/logo.png";
+import { HiMenu, HiX } from "react-icons/hi";
+import { MdLogout } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); 
-  const [isJoinOpenMobile, setIsJoinOpenMobile] = useState(false);
+  const { user, logout } = useAuth();
+  const { dark, setDark } = useTheme();
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const isJobPoster = user && ["jobposter-private", "jobposter-company"].includes(user.role);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    setMenuOpen(false);
+    setUserMenuOpen(false);
+  };
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === "en" ? "de" : "en");
+  };
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <img src={logo} alt="Jobs Per Hour Berlin" className="h-10 w-auto" />
-          <span className="text-xl font-bold text-orange-500 hidden md:inline">
-            Jobs <span className="text-black">Per Hour</span> Berlin
-          </span>
-        </div>
+    <>
+      {/* Navbar */}
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-all duration-300 ${
+          isScrolled
+            ? dark
+              ? "bg-black/70 shadow-lg border-b border-gray-800"
+              : "bg-white/70 shadow-lg border-b border-gray-200"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 group cursor-pointer">
+            <img src={logo} alt="Jobs Per Hour" className="h-10" />
+            <span className="font-bold text-xl tracking-wide group-hover:opacity-80 transition">
+              <span className=" text-gray-900">Jobs Per Hour</span>
+              <span className={`${dark ? "text-white" : "text-orange-500"} ml-1`}> Berlin</span>
+            </span>
+          </Link>
 
-        {/* Hamburger button */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-orange-500 focus:outline-none"
-          >
-            {isOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex space-x-6 items-center font-medium">
+            <AnimatedLink to="/" label={t("home")} />
+            <AnimatedLink to="/jobs" label={t("jobs")} />
+            <AnimatedLink to="/community" label={t("community")} />
+            {isJobPoster && <AnimatedLink to="/post-job" label={t("postJob")} />}
+            <AnimatedLink to="/contactUs" label={t("contactUs")} />
+
+            {/* User Menu */}
+            {user ? (
+              <li className="relative">
+                <button onClick={() => setUserMenuOpen(!userMenuOpen)}>
+                  <FaUserCircle className="text-2xl hover:text-orange-500 transition" />
+                </button>
+
+                {userMenuOpen && (
+                  <div
+                    className={`absolute right-0 mt-3 w-48 rounded-xl shadow-xl p-4 transition-all animate-fadeIn ${
+                      dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+                    }`}
+                  >
+                    <Link className="menu-item" to="/profile">{t("profile")}</Link>
+                    <Link className="menu-item" to="/settings">{t("settings")}</Link>
+                    
+                    <button
+  onClick={handleLogout}
+  className="py-3 text-red-500 font-semibold flex items-center gap-2 border-t pt-4"
+>
+  <MdLogout />
+  {t("logout")}
+</button>
+                  </div>
+                )}
+              </li>
             ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <>
+                <li><Link to="/login" className="hover:text-orange-500 transition">{t("login")}</Link></li>
+
+                <li>
+                  <Link
+                    to="/signup"
+                    className="px-5 py-2 bg-orange-500 text-white rounded-full shadow-lg hover:bg-orange-600 hover:scale-105 transition-all"
+                  >
+                    {t("signup")}
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {/* Language + Theme */}
+            <li>
+              <button
+                onClick={toggleLanguage}
+                className="px-3 py-1 rounded-full border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+                {i18n.language.toUpperCase()}
+              </button>
+            </li>
+
+            <li>
+              <button onClick={() => setDark(!dark)} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full transition">
+                {dark ? <BsSunFill className="text-yellow-400" /> : <BsMoonStarsFill />}
+              </button>
+            </li>
+          </ul>
+
+          {/* Mobile Toggle */}
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-3xl text-orange-500">
+            {menuOpen ? <HiX /> : <HiMenu />}
           </button>
         </div>
+      </nav>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex md:items-center md:space-x-6">
-          <li>
-            <Link to="/" className="px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/jobs" className="px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition">
-              Jobs
-            </Link>
-          </li>
-          <li>
-            <Link to="/post-job" className="px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition">
-              Post a Job
-            </Link>
-          </li>
-          {/* Join Us Dropdown */}
-          <li className="relative group">
-            <button className="px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition font-semibold">
-              Join Us
-            </button>
-            <ul className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transform -translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-50">
-              <li>
-                <Link to="/login" className="block px-4 py-2 hover:bg-orange-100 hover:text-orange-500 transition rounded-t-lg">
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link to="/signup" className="block px-4 py-2 hover:bg-orange-500 hover:text-white transition rounded-b-lg">
-                  Sign Up
-                </Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link to="/contact" className="px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition">
-              Contact Us
-            </Link>
-          </li>
-          {/* Language Switcher */}
-          <li className="flex border border-gray-300 rounded overflow-hidden ml-4">
-            <button className="px-2 py-1 hover:bg-gray-100">EN</button>
-            <button className="px-2 py-1 hover:bg-gray-100">DE</button>
-          </li>
-        </ul>
-      </div>
-
-      {/* Mobile Slide Menu */}
-      <div className={`fixed top-0 right-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 z-40 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
-        <div className="flex justify-between items-center px-4 py-3 border-b">
-          <img src={logo} alt="Jobs Per Hour Berlin" className="h-10 w-auto" />
-          <button onClick={() => setIsOpen(false)} className="text-orange-500 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+      {/* Mobile Sidebar */}
+      <div
+        className={`fixed top-0 right-0 h-full w-72 shadow-xl transition-all duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        } ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"} z-50`}
+      >
+        <div className="px-5 py-5 border-b flex justify-between items-center">
+          <img src={logo} className="h-10" />
+          <HiX className="text-2xl text-orange-500 cursor-pointer" onClick={() => setMenuOpen(false)} />
         </div>
-        <ul className="flex flex-col mt-4 space-y-3 px-4">
-          <li>
-            <Link to="/" className="block px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition" onClick={() => setIsOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/jobs" className="block px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition" onClick={() => setIsOpen(false)}>
-              Jobs
-            </Link>
-          </li>
-          <li>
-            <Link to="/post-job" className="block px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition" onClick={() => setIsOpen(false)}>
-              Post a Job
-            </Link>
-          </li>
-          {/* Join Us Mobile Dropdown */}
-          <li className="flex flex-col">
-            <button onClick={() => setIsJoinOpenMobile(!isJoinOpenMobile)} className="w-full text-left px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition font-semibold">
-              Join Us
+
+        <ul className="px-5 mt-4 space-y-4 text-lg">
+          <MobileLink to="/" label={t("home")} close={setMenuOpen} />
+          <MobileLink to="/jobs" label={t("jobs")} close={setMenuOpen} />
+          <MobileLink to="/community" label={t("community")} close={setMenuOpen} />
+          {isJobPoster && <MobileLink to="/post-job" label={t("postJob")} close={setMenuOpen} />}
+          <MobileLink to="/contactUs" label={t("contactUs")} close={setMenuOpen} />
+
+          <div className="pt-5 border-t">
+            <button onClick={() => setDark(!dark)} className="flex items-center gap-3 text-lg">
+              {dark ? <BsSunFill /> : <BsMoonStarsFill />} Theme
             </button>
-            {isJoinOpenMobile && (
-              <ul className="flex flex-col ml-2 mt-2 space-y-2 border-l border-gray-200 pl-2">
-                <li>
-                  <Link to="/login" className="block px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/signup" className="block px-3 py-2 rounded hover:bg-orange-500 hover:text-white transition" onClick={() => setIsOpen(false)}>
-                    Sign Up
-                  </Link>
-                </li>
-              </ul>
-            )}
-          </li>
-          <li>
-            <Link to="/contact" className="block px-3 py-2 rounded hover:bg-orange-100 hover:text-orange-500 transition" onClick={() => setIsOpen(false)}>
-              Contact Us
-            </Link>
-          </li>
-          {/* Language Switcher */}
-          <li className="flex border border-gray-300 rounded overflow-hidden mt-4">
-            <button className="px-2 py-1 hover:bg-gray-100">EN</button>
-            <button className="px-2 py-1 hover:bg-gray-100">DE</button>
-          </li>
+          </div>
+
+          {user && (
+           <button
+  onClick={handleLogout}
+  className="py-3 text-red-500 font-semibold flex items-center gap-2 border-t pt-4"
+>
+  <MdLogout />
+  {t("logout")}
+</button>
+          )}
         </ul>
       </div>
-    </nav>
+    </>
   );
 };
+
+const AnimatedLink = ({ to, label }) => (
+  <li>
+    <Link
+      to={to}
+      className="relative group hover:text-orange-500 transition"
+    >
+      {label}
+      <span className="absolute left-0 -bottom-1 w-0 group-hover:w-full h-0.5 bg-orange-500 transition-all"></span>
+    </Link>
+  </li>
+);
+
+const MobileLink = ({ to, label, close }) => (
+  <li>
+    <Link to={to} onClick={() => close(false)} className="block py-2 hover:text-orange-500 transition">
+      {label}
+    </Link>
+  </li>
+);
 
 export default Navbar;

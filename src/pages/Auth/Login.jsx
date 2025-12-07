@@ -1,114 +1,140 @@
+// src/pages/Auth/Login.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaEnvelope, FaLock, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { loginUser } from "../../api/userApi";
+import { useAuth } from "../../context/AuthContext";
+import pic from "../../assets/Images/signup/signup.jpg"; // Left image
 
 const Login = () => {
-  const [userType, setUserType] = useState("jobseeker"); 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User Type:", userType);
-    console.log(formData);
-    // Add login logic here
+    setErrorMessage("");
+    setLoading(true);
+
+    try {
+      const data = await loginUser(formData);
+      if (data?.access_token && data?.user) {
+        login(data.user, data.access_token);
+
+        switch (data.user.role) {
+          case "admin":
+            navigate("/admin-dashboard");
+            break;
+          case "jobposter-private":
+          case "jobposter-company":
+            navigate("/poster-dashboard");
+            break;
+          case "jobseeker":
+            navigate("/seeker-dashboard");
+            break;
+          default:
+            navigate("/");
+            break;
+        }
+      } else setErrorMessage("Invalid response from server");
+    } catch (err) {
+      setErrorMessage(
+        err.response?.data?.message || "Login failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSocialLogin = (provider) => {
-    console.log(`Login with ${provider}`);
-    // Integrate your Google/LinkedIn OAuth logic here
+    alert(`Login with ${provider} coming soon!`);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-50 to-orange-100 px-4 py-12">
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-8">
-        <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">
-          Login to Your Account
-        </h2>
+    <div className="min-h-screen flex flex-col md:flex-row">
 
-        {/* User Type Selector */}
-        <div className="flex justify-center mb-6 space-x-4">
-          <button
-            type="button"
-            onClick={() => setUserType("jobseeker")}
-            className={`px-4 py-2 rounded-lg font-semibold transition ${
-              userType === "jobseeker"
-                ? "bg-orange-400 text-white shadow-lg"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Job Seeker
-          </button>
-          <button
-            type="button"
-            onClick={() => setUserType("jobposter")}
-            className={`px-4 py-2 rounded-lg font-semibold transition ${
-              userType === "jobposter"
-                ? "bg-orange-400 text-white shadow-lg"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Job Poster
-          </button>
+      {/* Left - Image */}
+      <div className="md:w-1/2 hidden md:flex relative overflow-hidden">
+        <img
+          src={pic}
+          alt="Login Illustration"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+          <h1 className="text-white text-4xl font-bold text-center animate-fade-up">
+            Welcome to JobsPerHourBerlin
+          </h1>
+          <p className="text-white/80 mt-4 text-center animate-fade-up delay-200">
+            Log in and manage your jobs efficiently.
+          </p>
         </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email */}
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
-            <FaEnvelope className="text-gray-400 mr-2" />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full outline-none"
-            />
-          </div>
+      {/* Right - Login Form */}
+      <div className="md:w-1/2 flex items-center justify-center bg-white px-6 py-12">
+        <div className="w-full max-w-md animate-fade-right">
+          <h2 className="text-4xl font-bold text-orange-500 mb-6 text-center">
+            Login to Your Account
+          </h2>
 
-          {/* Password */}
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
-            <FaLock className="text-gray-400 mr-2" />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full outline-none"
-            />
-          </div>
+          {/* Email & Password Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
+              <FaEnvelope className="text-gray-400 mr-2" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full outline-none bg-transparent"
+              />
+            </div>
 
-          {/* Forgot Password Link */}
-          <div className="text-right">
-            <Link
-              to="/forgot-password"
-              className="text-sm text-orange-500 hover:underline"
+            <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 relative focus-within:ring-2 focus-within:ring-orange-400 transition">
+              <FaLock className="text-gray-400 mr-2" />
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full outline-none bg-transparent pr-10"
+              />
+              <span
+                className="absolute right-3 cursor-pointer text-gray-400 hover:text-orange-500 transition"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+
+            {errorMessage && (
+              <p className="text-red-500 text-sm transition-opacity">{errorMessage}</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 font-semibold rounded-lg text-white bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg hover:scale-105 transform transition-all ${
+                loading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
-              Forgot Password?
-            </Link>
-          </div>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
 
-          {/* Login Button */}
-          <button
-            type="submit"
-            className="w-full py-3 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
-          >
-            Login
-          </button>
-        </form>
-
-        {/* Social Login - Only for Job Seekers */}
-        {userType === "jobseeker" && (
+          {/* Social Login Buttons */}
           <div className="mt-4 flex flex-col gap-3">
             <button
               type="button"
@@ -125,15 +151,30 @@ const Login = () => {
               <FaLinkedin className="text-blue-700" /> Login with LinkedIn
             </button>
           </div>
-        )}
 
-        <p className="text-gray-600 text-sm text-center mt-4">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-orange-500 font-semibold hover:underline">
-            Sign Up
-          </Link>
-        </p>
+          <p className="text-gray-500 text-sm text-center mt-6">
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-orange-500 font-semibold hover:underline">
+              Sign Up
+            </Link>
+          </p>
+        </div>
       </div>
+
+      {/* Animations */}
+      <style>{`
+        @keyframes fadeRight {
+          0% { opacity: 0; transform: translateX(30px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-right { animation: fadeRight 0.8s ease forwards; }
+
+        @keyframes fadeUp {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeUp 1s ease forwards; }
+      `}</style>
     </div>
   );
 };

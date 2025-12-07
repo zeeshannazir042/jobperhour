@@ -1,265 +1,328 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { registerUser } from "../../api/userApi";
+import heroVideo from "../../../public/videos/video.mp4"; // Video in public folder
 
-const Signup = () => {
-  const [userType, setUserType] = useState("jobseeker"); // Job Seeker / Job Poster
-  const [posterType, setPosterType] = useState("private"); // Private or Business for Job Poster
+const Register = () => {
+  const navigate = useNavigate();
+  const [userType, setUserType] = useState("jobseeker");
+  const [posterType, setPosterType] = useState("private");
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
-    profileName: "", // for private poster
     companyName: "",
     businessEmail: "",
     businessAddress: "",
-    vatId: "",
+    vat: "",
     website: "",
     agree: false,
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({ 
-      ...formData, 
-      [name]: type === "checkbox" ? checked : value 
-    });
+    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User Type:", userType);
-    if (userType === "jobposter") console.log("Poster Type:", posterType);
-    console.log(formData);
-    // Add signup logic here
+    const role =
+      userType === "jobseeker"
+        ? "jobseeker"
+        : posterType === "private"
+        ? "jobposter-private"
+        : "jobposter-company";
+
+    const payload = {
+      username:
+        userType === "jobseeker"
+          ? formData.username
+          : posterType === "private"
+          ? formData.username
+          : formData.companyName,
+      email:
+        userType === "jobseeker"
+          ? formData.email
+          : posterType === "private"
+          ? formData.email
+          : formData.businessEmail,
+      password: formData.password,
+      role,
+      companyName: posterType === "business" ? formData.companyName : undefined,
+      businessAddress: posterType === "business" ? formData.businessAddress : undefined,
+      vat: posterType === "business" ? formData.vat : undefined,
+      website: posterType === "business" ? formData.website : undefined,
+    };
+
+    try {
+      const data = await registerUser(payload);
+      alert(data.message || "Registration successful!");
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      alert(err.message || "Registration failed");
+    }
   };
 
   const handleSocialLogin = (provider) => {
-    console.log(`Sign up with ${provider}`);
-    // Integrate your Google/LinkedIn OAuth logic here
+    alert(`Sign up with ${provider} coming soon!`);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-50 to-orange-100 px-4 py-12">
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-lg p-8">
-        <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">
-            Sign Up for an Accounts
-        </h2>
+    <div className="min-h-screen flex flex-col md:flex-row">
 
-        {/* User Type Selector */}
-        <div className="flex justify-center mb-6 space-x-4">
-          <button
-            type="button"
-            onClick={() => setUserType("jobseeker")}
-            className={`px-4 py-2 rounded-lg font-semibold transition ${
-              userType === "jobseeker" 
-                ? "bg-orange-400 text-white shadow-lg" 
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Job Seeker
-          </button>
-          <button
-            type="button"
-            onClick={() => setUserType("jobposter")}
-            className={`px-4 py-2 rounded-lg font-semibold transition ${
-              userType === "jobposter" 
-                ? "bg-orange-400 text-white shadow-lg" 
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Job Poster
-          </button>
+      {/* Left Video / Animation */}
+      <div className="md:w-1/2 hidden md:flex relative overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover transform scale-110 animate-parallax"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+          <h1 className="text-white text-4xl font-bold text-center animate-fade-up">
+            Join JobsPerHourBerlin
+          </h1>
+          <p className="text-white/80 mt-4 text-center animate-fade-up delay-200">
+            Find or post hourly jobs in Berlin easily.
+          </p>
         </div>
+      </div>
 
-        {/* Job Poster Subtype */}
-        {userType === "jobposter" && (
+      {/* Right Form */}
+      <div className="md:w-1/2 flex items-center justify-center bg-white px-6 py-12">
+        <div className="w-full max-w-lg animate-fade-right">
+          <h2 className="text-4xl font-bold text-orange-500 mb-6 text-center">Sign Up</h2>
+
+          {/* User Type Selector */}
           <div className="flex justify-center mb-6 space-x-4">
             <button
               type="button"
-              onClick={() => setPosterType("private")}
+              onClick={() => setUserType("jobseeker")}
               className={`px-4 py-2 rounded-lg font-semibold transition ${
-                posterType === "private" 
-                  ? "bg-orange-400 text-white shadow-lg" 
+                userType === "jobseeker"
+                  ? "bg-orange-400 text-white shadow-lg"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              Private
+              Job Seeker
             </button>
             <button
               type="button"
-              onClick={() => setPosterType("business")}
+              onClick={() => setUserType("jobposter")}
               className={`px-4 py-2 rounded-lg font-semibold transition ${
-                posterType === "business" 
-                  ? "bg-orange-400 text-white shadow-lg" 
+                userType === "jobposter"
+                  ? "bg-orange-400 text-white shadow-lg"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              Business / Commercial
+              Job Poster
             </button>
           </div>
-        )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name / Profile Name */}
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
-            <FaUser className="text-gray-400 mr-2" />
-            <input
-              type="text"
-              name="name"
-              placeholder={
-                userType === "jobseeker"
-                  ? "Full Name"
-                  : posterType === "private"
-                  ? "Profile Name"
-                  : "Contact Person Name"
-              }
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full outline-none"
-            />
-          </div>
-
-          {/* Email / Business Email */}
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
-            <FaEnvelope className="text-gray-400 mr-2" />
-            <input
-              type="email"
-              name={
-                userType === "jobseeker"
-                  ? "email"
-                  : posterType === "business"
-                  ? "businessEmail"
-                  : "email"
-              }
-              placeholder={
-                userType === "jobseeker"
-                  ? "Email Address"
-                  : posterType === "business"
-                  ? "Business Email"
-                  : "Email Address"
-              }
-              value={
-                userType === "jobseeker"
-                  ? formData.email
-                  : posterType === "business"
-                  ? formData.businessEmail
-                  : formData.email
-              }
-              onChange={handleChange}
-              required
-              className="w-full outline-none"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
-            <FaLock className="text-gray-400 mr-2" />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full outline-none"
-            />
-          </div>
-
-          {/* Business Fields */}
-          {userType === "jobposter" && posterType === "business" && (
-            <>
-              <input
-                type="text"
-                name="companyName"
-                placeholder="Company Name"
-                value={formData.companyName}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
-                required
-              />
-              <input
-                type="text"
-                name="businessAddress"
-                placeholder="Business Address"
-                value={formData.businessAddress}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
-                required
-              />
-              <input
-                type="text"
-                name="vatId"
-                placeholder="VAT / Tax ID (optional)"
-                value={formData.vatId}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
-              />
-              <input
-                type="text"
-                name="website"
-                placeholder="Company Website (optional)"
-                value={formData.website}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
-              />
-            </>
+          {/* Job Poster Subtype */}
+          {userType === "jobposter" && (
+            <div className="flex justify-center mb-6 space-x-4">
+              <button
+                type="button"
+                onClick={() => setPosterType("private")}
+                className={`px-4 py-2 rounded-lg font-semibold transition ${
+                  posterType === "private"
+                    ? "bg-orange-400 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                Private
+              </button>
+              <button
+                type="button"
+                onClick={() => setPosterType("business")}
+                className={`px-4 py-2 rounded-lg font-semibold transition ${
+                  posterType === "business"
+                    ? "bg-orange-400 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                Business / Company
+              </button>
+            </div>
           )}
 
-          {/* Agree Checkbox */}
-          <label className="flex items-center space-x-2 text-sm text-gray-600">
-            <input
-              type="checkbox"
-              name="agree"
-              checked={formData.agree}
-              onChange={handleChange}
-              required
-              className="form-checkbox h-4 w-4 text-orange-500"
-            />
-            <span>
-              I agree that my information may be shared with third parties for job-related purposes.
-            </span>
-          </label>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Username */}
+            <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
+              <FaUser className="text-gray-400 mr-2" />
+              <input
+                type="text"
+                name="username"
+                placeholder={
+                  userType === "jobposter" && posterType === "business"
+                    ? "Contact Person Name"
+                    : "Full Name"
+                }
+                value={formData.username}
+                onChange={handleChange}
+                required
+                className="w-full outline-none"
+              />
+            </div>
 
-          {/* Manual Signup Button */}
-          <button
-            type="submit"
-            className="w-full py-3 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
-          >
-            Sign Up
-          </button>
-        </form>
+            {/* Email */}
+            <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
+              <FaEnvelope className="text-gray-400 mr-2" />
+              <input
+                type="email"
+                name={
+                  userType === "jobposter" && posterType === "business"
+                    ? "businessEmail"
+                    : "email"
+                }
+                placeholder={
+                  userType === "jobposter" && posterType === "business"
+                    ? "Business Email"
+                    : "Email"
+                }
+                value={
+                  userType === "jobposter" && posterType === "business"
+                    ? formData.businessEmail
+                    : formData.email
+                }
+                onChange={handleChange}
+                required
+                className="w-full outline-none"
+              />
+            </div>
 
-        {/* Social Login - Only for Job Seekers */}
-        {userType === "jobseeker" && (
-          <div className="mt-4 flex flex-col gap-3">
+            {/* Password */}
+            <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
+              <FaLock className="text-gray-400 mr-2" />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full outline-none"
+              />
+            </div>
+
+            {/* Business Fields */}
+            {userType === "jobposter" && posterType === "business" && (
+              <>
+                <input
+                  type="text"
+                  name="companyName"
+                  placeholder="Company Name"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
+                />
+                <input
+                  type="text"
+                  name="businessAddress"
+                  placeholder="Business Address"
+                  value={formData.businessAddress}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
+                />
+                <input
+                  type="text"
+                  name="vat"
+                  placeholder="VAT / Tax ID (optional)"
+                  value={formData.vat}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
+                />
+                <input
+                  type="text"
+                  name="website"
+                  placeholder="Company Website (optional)"
+                  value={formData.website}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"
+                />
+              </>
+            )}
+
+            {/* Agree Checkbox */}
+            <label className="flex items-center space-x-2 text-sm text-gray-600">
+              <input
+                type="checkbox"
+                name="agree"
+                checked={formData.agree}
+                onChange={handleChange}
+                required
+                className="form-checkbox h-4 w-4 text-orange-500"
+              />
+              <span>I agree to share my info for job-related purposes.</span>
+            </label>
+
             <button
-              type="button"
-              onClick={() => handleSocialLogin("Google")}
-              className="flex items-center justify-center gap-2 w-full py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+              type="submit"
+              className="w-full py-3 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
             >
-              <FaGoogle className="text-red-500" /> Sign Up with Google
+              Sign Up
             </button>
-            <button
-              type="button"
-              onClick={() => handleSocialLogin("LinkedIn")}
-              className="flex items-center justify-center gap-2 w-full py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
-            >
-              <FaLinkedin className="text-blue-700" /> Sign Up with LinkedIn
-            </button>
-          </div>
-        )}
+          </form>
 
-        <p className="text-gray-600 text-sm text-center mt-4">
-          Already have an account?{" "}
-          <Link to="/login" className="text-orange-500 font-semibold hover:underline">
-            Login
-          </Link>
-        </p>
+          {/* Social Login */}
+          {userType === "jobseeker" && (
+            <div className="mt-4 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => handleSocialLogin("Google")}
+                className="flex items-center justify-center gap-2 w-full py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+              >
+                <FaGoogle className="text-red-500" /> Sign Up with Google
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSocialLogin("LinkedIn")}
+                className="flex items-center justify-center gap-2 w-full py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+              >
+                <FaLinkedin className="text-blue-700" /> Sign Up with LinkedIn
+              </button>
+            </div>
+          )}
+
+          <p className="text-gray-600 text-sm text-center mt-4">
+            Already have an account?{" "}
+            <Link to="/login" className="text-orange-500 font-semibold hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
+
+      {/* Animations */}
+      <style>{`
+        @keyframes fadeRight {
+          0% { opacity: 0; transform: translateX(30px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-right { animation: fadeRight 0.8s ease forwards; }
+
+        @keyframes fadeUp {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeUp 1s ease forwards; }
+
+        @keyframes parallax {
+          0%, 100% { transform: translateY(0) scale(1.1); }
+          50% { transform: translateY(-20px) scale(1.12); }
+        }
+        .animate-parallax { animation: parallax 15s ease-in-out infinite; }
+      `}</style>
     </div>
   );
 };
 
-export default Signup;
+export default Register;
