@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
+
 import logo from "../../assets/Images/Homepage/logo.png";
 import { HiMenu, HiX } from "react-icons/hi";
 import { MdLogout } from "react-icons/md";
@@ -19,7 +21,28 @@ const Navbar = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const isJobPoster = user && ["jobposter-private", "jobposter-company"].includes(user.role);
+  const userMenuRef = useRef(null);
+
+  const isJobPoster =
+    user && ["jobposter-private", "jobposter-company"].includes(user.role);
+
+  const getDashboardRoute = () => {
+    if (!user) return "/";
+    if (user.role === "admin") return "/admin-dashboard";
+    if (["jobposter-private", "jobposter-company"].includes(user.role))
+      return "/poster-dashboard";
+    return "/seeker-dashboard";
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -34,159 +57,188 @@ const Navbar = () => {
     setUserMenuOpen(false);
   };
 
-  const toggleLanguage = () => {
+  const toggleLanguage = () =>
     i18n.changeLanguage(i18n.language === "en" ? "de" : "en");
-  };
 
   return (
     <>
-      {/* Navbar */}
-      <nav
-        className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-all duration-300 ${
+      {/* NAVBAR */}
+      <motion.nav
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-all ${
           isScrolled
             ? dark
-              ? "bg-black/70 shadow-lg border-b border-gray-800"
-              : "bg-white/70 shadow-lg border-b border-gray-200"
+              ? "bg-black/70 border-b border-gray-800"
+              : "bg-white/70 border-b border-gray-200"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group cursor-pointer">
+        <div className="max-w-7xl mx-auto h-16 px-6 flex items-center justify-between">
+          {/* LOGO */}
+          <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Jobs Per Hour" className="h-10" />
-            <span className="font-bold text-xl tracking-wide group-hover:opacity-80 transition">
-              <span className=" text-gray-900">Jobs Per Hour</span>
-              <span className={`${dark ? "text-white" : "text-orange-500"} ml-1`}> Berlin</span>
+            <span className="font-bold text-xl">
+              <span className="text-gray-900 dark:text-white">
+                Jobs Per Hour
+              </span>
+              <span className="ml-1 text-orange-500">Berlin</span>
             </span>
           </Link>
 
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-6 items-center font-medium">
-            <AnimatedLink to="/" label={t("home")} />
-            <AnimatedLink to="/jobs" label={t("jobs")} />
-            <AnimatedLink to="/community" label={t("community")} />
-            {isJobPoster && <AnimatedLink to="/post-job" label={t("postJob")} />}
-            <AnimatedLink to="/contactUs" label={t("contactUs")} />
+          {/* DESKTOP MENU */}
+          <ul className="hidden md:flex items-center space-x-6 font-medium">
+            <NavLink to="/" label={t("home")} />
+            <NavLink to="/about" label={t("About Us") || "About"} />
+            <NavLink to="/jobs" label={t("jobs")} />
+            <NavLink to="/community" label={t("community")} />
+            {isJobPoster && <NavLink to="/post-job" label={t("postJob")} />}
+            <NavLink to="/contactUs" label={t("contactUs")} />
 
-            {/* User Menu */}
+            {/* USER MENU */}
             {user ? (
-              <li className="relative">
+              <li className="relative" ref={userMenuRef}>
                 <button onClick={() => setUserMenuOpen(!userMenuOpen)}>
                   <FaUserCircle className="text-2xl hover:text-orange-500 transition" />
                 </button>
 
-                {userMenuOpen && (
-                  <div
-                    className={`absolute right-0 mt-3 w-48 rounded-xl shadow-xl p-4 transition-all animate-fadeIn ${
-                      dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-                    }`}
-                  >
-                    <Link className="menu-item" to="/profile">{t("profile")}</Link>
-                    <Link className="menu-item" to="/settings">{t("settings")}</Link>
-                    
-                    <button
-  onClick={handleLogout}
-  className="py-3 text-red-500 font-semibold flex items-center gap-2 border-t pt-4"
->
-  <MdLogout />
-  {t("logout")}
-</button>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {userMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className={`absolute right-0 mt-3 w-48 rounded-xl shadow-xl p-4 ${
+                        dark
+                          ? "bg-gray-900 text-white"
+                          : "bg-white text-gray-900"
+                      }`}
+                    >
+                      <Link
+                        to={getDashboardRoute()}
+                        onClick={() => setUserMenuOpen(false)}
+                        className="block py-2 hover:text-orange-500"
+                      >
+                        {t("dashboard")}
+                      </Link>
+
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-2 text-red-500 font-semibold py-2 mt-2 border-t"
+                      >
+                        <MdLogout /> {t("logout")}
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </li>
             ) : (
               <>
-                <li><Link to="/login" className="hover:text-orange-500 transition">{t("login")}</Link></li>
-
-                <li>
-                  <Link
-                    to="/signup"
-                    className="px-5 py-2 bg-orange-500 text-white rounded-full shadow-lg hover:bg-orange-600 hover:scale-105 transition-all"
-                  >
-                    {t("signup")}
-                  </Link>
-                </li>
+                <Link to="/login">{t("login")}</Link>
+                <Link
+                  to="/signup"
+                  className="px-5 py-2 bg-orange-500 text-white rounded-full"
+                >
+                  {t("signup")}
+                </Link>
               </>
             )}
 
-            {/* Language + Theme */}
-            <li>
-              <button
-                onClick={toggleLanguage}
-                className="px-3 py-1 rounded-full border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-              >
-                {i18n.language.toUpperCase()}
-              </button>
-            </li>
+            {/* LANGUAGE */}
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-1 rounded-full border"
+            >
+              {i18n.language.toUpperCase()}
+            </button>
 
-            <li>
-              <button onClick={() => setDark(!dark)} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full transition">
-                {dark ? <BsSunFill className="text-yellow-400" /> : <BsMoonStarsFill />}
-              </button>
-            </li>
+            {/* THEME */}
+            <button onClick={() => setDark(!dark)} className="p-2 rounded-full">
+              {dark ? <BsSunFill /> : <BsMoonStarsFill />}
+            </button>
           </ul>
 
-          {/* Mobile Toggle */}
-          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-3xl text-orange-500">
-            {menuOpen ? <HiX /> : <HiMenu />}
+          {/* MOBILE BUTTON */}
+          <button
+            className="md:hidden text-3xl text-orange-500"
+            onClick={() => setMenuOpen(true)}
+          >
+            <HiMenu />
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-72 shadow-xl transition-all duration-300 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"} z-50`}
-      >
-        <div className="px-5 py-5 border-b flex justify-between items-center">
-          <img src={logo} className="h-10" />
-          <HiX className="text-2xl text-orange-500 cursor-pointer" onClick={() => setMenuOpen(false)} />
-        </div>
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3 }}
+            className={`fixed top-0 right-0 h-full w-72 z-50 ${
+              dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+            }`}
+          >
+            <div className="p-5 flex justify-between border-b">
+              <img src={logo} className="h-10" />
+              <HiX
+                className="text-2xl cursor-pointer"
+                onClick={() => setMenuOpen(false)}
+              />
+            </div>
 
-        <ul className="px-5 mt-4 space-y-4 text-lg">
-          <MobileLink to="/" label={t("home")} close={setMenuOpen} />
-          <MobileLink to="/jobs" label={t("jobs")} close={setMenuOpen} />
-          <MobileLink to="/community" label={t("community")} close={setMenuOpen} />
-          {isJobPoster && <MobileLink to="/post-job" label={t("postJob")} close={setMenuOpen} />}
-          <MobileLink to="/contactUs" label={t("contactUs")} close={setMenuOpen} />
+            <ul className="p-5 space-y-4 text-lg">
+              <MobileLink to="/" label={t("home")} close={setMenuOpen} />
+              <MobileLink to="/about" label={t("About Us") || "About"} close={setMenuOpen} />
+              <MobileLink to="/jobs" label={t("jobs")} close={setMenuOpen} />
+              <MobileLink to="/community" label={t("community")} close={setMenuOpen} />
+              {isJobPoster && (
+                <MobileLink to="/post-job" label={t("postJob")} close={setMenuOpen} />
+              )}
+              <MobileLink to="/contactUs" label={t("contactUs")} close={setMenuOpen} />
 
-          <div className="pt-5 border-t">
-            <button onClick={() => setDark(!dark)} className="flex items-center gap-3 text-lg">
-              {dark ? <BsSunFill /> : <BsMoonStarsFill />} Theme
-            </button>
-          </div>
+              {user && (
+                <MobileLink
+                  to={getDashboardRoute()}
+                  label={t("dashboard")}
+                  close={setMenuOpen}
+                />
+              )}
 
-          {user && (
-           <button
-  onClick={handleLogout}
-  className="py-3 text-red-500 font-semibold flex items-center gap-2 border-t pt-4"
->
-  <MdLogout />
-  {t("logout")}
-</button>
-          )}
-        </ul>
-      </div>
+              {user && (
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 text-red-500 pt-4 border-t"
+                >
+                  <MdLogout /> {t("logout")}
+                </button>
+              )}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
 
-const AnimatedLink = ({ to, label }) => (
+/* ---------------- Reusable Links ---------------- */
+
+const NavLink = ({ to, label }) => (
   <li>
     <Link
       to={to}
-      className="relative group hover:text-orange-500 transition"
+      className="relative hover:text-orange-500 transition after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-orange-500 after:transition-all hover:after:w-full"
     >
       {label}
-      <span className="absolute left-0 -bottom-1 w-0 group-hover:w-full h-0.5 bg-orange-500 transition-all"></span>
     </Link>
   </li>
 );
 
 const MobileLink = ({ to, label, close }) => (
   <li>
-    <Link to={to} onClick={() => close(false)} className="block py-2 hover:text-orange-500 transition">
+    <Link to={to} onClick={() => close(false)} className="block py-1">
       {label}
     </Link>
   </li>

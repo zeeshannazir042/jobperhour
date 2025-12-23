@@ -77,7 +77,7 @@ const ContactUs = () => {
           {/* Contact Info */}
           <div className="space-y-3 bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
             <div className="flex items-center gap-2">
-              <FaPhone className="text-orange-500" /> +49 157 83716538
+              <FaPhone className="text-orange-500" /> +49 157 83716538 whatsapp
             </div>
             <div className="flex items-center gap-2">
               <FaEnvelope className="text-orange-500" /> contact@jobsperhourberlin.de

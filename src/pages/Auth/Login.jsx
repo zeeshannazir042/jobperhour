@@ -2,9 +2,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGoogle, FaLinkedin } from "react-icons/fa";
-import { loginUser } from "../../api/userApi";
 import { useAuth } from "../../context/AuthContext";
-import pic from "../../assets/Images/signup/signup.jpg"; // Left image
+import pic from "../../assets/Images/signup/signup.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,29 +23,28 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const data = await loginUser(formData);
-      if (data?.access_token && data?.user) {
-        login(data.user, data.access_token);
+      // Use AuthContext login method
+      const data = await login(formData);
 
-        switch (data.user.role) {
-          case "admin":
-            navigate("/admin-dashboard");
-            break;
-          case "jobposter-private":
-          case "jobposter-company":
-            navigate("/poster-dashboard");
-            break;
-          case "jobseeker":
-            navigate("/seeker-dashboard");
-            break;
-          default:
-            navigate("/");
-            break;
-        }
-      } else setErrorMessage("Invalid response from server");
+      // Navigate based on user role
+      switch (data.user.role) {
+        case "admin":
+          navigate("/admin-dashboard");
+          break;
+        case "jobposter-private":
+        case "jobposter-company":
+          navigate("/poster-dashboard");
+          break;
+        case "jobseeker":
+          navigate("/seeker-dashboard");
+          break;
+        default:
+          navigate("/");
+          break;
+      }
     } catch (err) {
       setErrorMessage(
-        err.response?.data?.message || "Login failed. Please try again."
+        err?.response?.data?.message || err.message || "Login failed. Please try again."
       );
     } finally {
       setLoading(false);
@@ -60,7 +58,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
 
-      {/* Left - Image */}
+      {/* Left Image */}
       <div className="md:w-1/2 hidden md:flex relative overflow-hidden">
         <img
           src={pic}
@@ -78,15 +76,15 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right - Login Form */}
+      {/* Right Login Form */}
       <div className="md:w-1/2 flex items-center justify-center bg-white px-6 py-12">
         <div className="w-full max-w-md animate-fade-right">
           <h2 className="text-4xl font-bold text-orange-500 mb-6 text-center">
             Login to Your Account
           </h2>
 
-          {/* Email & Password Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Email */}
             <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-orange-400 transition">
               <FaEnvelope className="text-gray-400 mr-2" />
               <input
@@ -100,6 +98,7 @@ const Login = () => {
               />
             </div>
 
+            {/* Password */}
             <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 relative focus-within:ring-2 focus-within:ring-orange-400 transition">
               <FaLock className="text-gray-400 mr-2" />
               <input
@@ -119,22 +118,20 @@ const Login = () => {
               </span>
             </div>
 
-            {errorMessage && (
-              <p className="text-red-500 text-sm transition-opacity">{errorMessage}</p>
-            )}
+            {/* Error Message */}
+            {errorMessage && <p className="text-red-500 text-sm transition-opacity">{errorMessage}</p>}
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 font-semibold rounded-lg text-white bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg hover:scale-105 transform transition-all ${
-                loading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
+              className={`w-full py-3 font-semibold rounded-lg text-white bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg hover:scale-105 transform transition-all ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
-          {/* Social Login Buttons */}
+          {/* Social Login */}
           <div className="mt-4 flex flex-col gap-3">
             <button
               type="button"
@@ -152,6 +149,7 @@ const Login = () => {
             </button>
           </div>
 
+          {/* Sign Up Link */}
           <p className="text-gray-500 text-sm text-center mt-6">
             Don't have an account?{" "}
             <Link to="/signup" className="text-orange-500 font-semibold hover:underline">
@@ -163,16 +161,9 @@ const Login = () => {
 
       {/* Animations */}
       <style>{`
-        @keyframes fadeRight {
-          0% { opacity: 0; transform: translateX(30px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes fadeRight { 0% { opacity: 0; transform: translateX(30px); } 100% { opacity: 1; transform: translateX(0); } }
         .animate-fade-right { animation: fadeRight 0.8s ease forwards; }
-
-        @keyframes fadeUp {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
         .animate-fade-up { animation: fadeUp 1s ease forwards; }
       `}</style>
     </div>

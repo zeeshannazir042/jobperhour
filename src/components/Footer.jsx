@@ -54,7 +54,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-semibold text-orange-400 mb-4">Contact</h3>
               <p className="flex items-center justify-center md:justify-start gap-2 text-gray-300 mb-2">
-                <FaPhoneAlt className="text-orange-500" /> +49 157 83716538
+                <FaPhoneAlt className="text-orange-500" /> +49 157 83716538 whatsapp
               </p>
               <p className="flex items-center justify-center md:justify-start gap-2 text-gray-300 mb-2">
                 <FaEnvelope className="text-orange-500" /> contact@jobsperhourberlin.de

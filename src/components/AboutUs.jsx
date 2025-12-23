@@ -30,10 +30,7 @@ const AboutUs = () => {
             JobsPerHourBerlin is Berlin's community-driven platform for micro jobs — connecting locals, newcomers and students with meaningful tasks around the neighborhood.
           </p>
 
-          <h3 className="text-2xl font-bold text-orange-300">Our Mission</h3>
-          <p className="text-lg leading-relaxed">
-            To empower people by creating opportunities within walking distance — where skills, time and trust truly matter.
-          </p>
+     
 
           <h3 className="text-2xl font-bold text-orange-300">Why Choose Us?</h3>
 

@@ -1261,7 +1261,7 @@
             },
             { 
                 id: 22, 
-                title: { en: "Government & Public Services", de: "Regierung & Öffentliche Dienste" }, 
+                title: { en: "Office & Admin Support", de: "Regierung & Öffentliche Dienste" }, 
                 icon: "🏛️", 
                 tags: ["government", "public services", "community", "regierung"],
                 vocabulary: [

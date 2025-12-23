@@ -1,87 +1,96 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./pages/Auth/Navigation";
 import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
 import Signup from "./pages/Auth/register";
 import Login from "./pages/Auth/Login";
+import EmailVerified from "./pages/EmailVerification";
 import PostJob from "./pages/PostJob";
 import JobList from "./pages/JobList";
 import CommunityPage from "./pages/CommunityPage";
-import AdminDashboard from "./pages/Admin/AdminDashboard";
-import PosterDashboard from "./pages/Admin/PosterDashboard";
-import SeekerDashboard from "./pages/Admin/SeekerDashboard";
 import ContactUs from "./pages/ContactUs";
+
+/* ---------------- Admin Pages ---------------- */
+import AdminLayout from "./pages/Admin/AdminLayout";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminUsers from "./pages/Admin/Users";
+import AdminJobs from "./pages/Admin/Jobs";
+import AdminCommunity from "./pages/Admin/Community";
+import AdminSettings from "./pages/Admin/Settings";
+
+/* ---------------- Auth & Context ---------------- */
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
+import { UserProvider } from "./context/UserContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Navbar />
-        <div className="pt-16"> {/* padding top to avoid navbar overlap */}
-          <Routes>
+        <UserProvider>
+          <Navbar />
 
-            {/* ------------------- Public Routes ------------------- */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/jobs" element={<JobList />} /> {/* public job listing */}
-            <Route path="/contactUs" element={<ContactUs />} />
-            <Route path="/community" element={<CommunityPage />} /> {/* public community page */}
+          <div className="pt-16">
+            <Routes>
+              {/* ---------------- Public Routes ---------------- */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/verify-email" element={<EmailVerified />} />
+              <Route path="/jobs" element={<JobList />} />
+              <Route path="/community" element={<CommunityPage />} />
+              <Route path="/contactUs" element={<ContactUs />} />
+              <Route path="/about" element={<AboutUs />} /> 
 
-            {/* ---------------- Job Poster Routes ---------------- */}
-            <Route
-              path="/post-job"
-              element={
-                <PrivateRoute allowedRoles={["jobposter-private", "jobposter-company"]}>
-                  <PostJob />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/my-jobs"
-              element={
-                <PrivateRoute allowedRoles={["jobposter-private", "jobposter-company"]}>
-                  <JobList /> {/* job poster view of their jobs */}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/poster-dashboard"
-              element={
-                <PrivateRoute allowedRoles={["jobposter-private", "jobposter-company"]}>
-                  <PosterDashboard />
-                </PrivateRoute>
-              }
-            />
+              {/* ---------------- Job Poster Routes ---------------- */}
+              <Route
+                path="/post-job"
+                element={
+                  <PrivateRoute allowedRoles={["jobposter-private", "jobposter-company"]}>
+                    <PostJob />
+                  </PrivateRoute>
+                }
+              />
 
-            {/* ---------------- Job Seeker Routes ---------------- */}
-            <Route
-              path="/seeker-dashboard"
-              element={
-                <PrivateRoute allowedRoles={["jobseeker"]}>
-                  <SeekerDashboard />
-                </PrivateRoute>
-              }
-            />
+              <Route
+                path="/my-jobs"
+                element={
+                  <PrivateRoute allowedRoles={["jobposter-private", "jobposter-company"]}>
+                    <JobList />
+                  </PrivateRoute>
+                }
+              />
 
-            {/* ------------------ Admin Routes ------------------ */}
-            <Route
-              path="/admin-dashboard"
-              element={
-                <PrivateRoute allowedRoles={["admin"]}>
-                  <AdminDashboard />
-                </PrivateRoute>
-              }
-            />
+              {/* ---------------- Admin Routes with Persistent Sidebar ---------------- */}
+              <Route
+                element={
+                  <PrivateRoute allowedRoles={["admin"]}>
+                    <AdminLayout />
+                  </PrivateRoute>
+                }
+              >
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/users" element={<AdminUsers />} />
+                <Route path="/admin/jobs" element={<AdminJobs />} />
+                <Route path="/admin/community" element={<AdminCommunity />} />
+                <Route path="/admin/settings" element={<AdminSettings />} />
+              </Route>
 
-            {/* ------------------ 404 Page ------------------ */}
-            <Route path="*" element={<h1 className="text-center mt-10">404 | Page Not Found</h1>} />
-
-          </Routes>
-        </div>
+              {/* ---------------- 404 ---------------- */}
+              <Route
+                path="*"
+                element={
+                  <h1 className="text-center mt-10 text-2xl font-semibold">
+                    404 | Page Not Found
+                  </h1>
+                }
+              />
+            </Routes>
+          </div>
+        </UserProvider>
       </AuthProvider>
     </ThemeProvider>
   );
