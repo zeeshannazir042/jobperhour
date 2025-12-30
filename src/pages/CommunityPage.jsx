@@ -194,7 +194,7 @@ const CommunityPage = () => {
       <section className="max-w-7xl mx-auto py-24 px-6 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-gray-900 dark:to-gray-800 rounded-3xl">
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-gray-800 dark:text-gray-100 relative">
           Why Join?
-          <span className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full transform -translate-x-1 animate-pulse"></span>
+          <span className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-500 rounded-full transform -translate-x-1 animate-pulse"></span>
         </h2>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {benefitsData.map((benefit, index) => (

@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 
 // Images
-import aboutImg from "../assets/images/About/community.jpg";
+import aboutImg from "../assets/images/community/herocommunity.jpg";
 import missionImg from "../assets/images/About/mission.jpg";
 import visionImg from "../assets/images/About/vision.jpg";
 import sauravImg from "../assets/images/founders/saurav.jpeg";
 import zeeshanImg from "../assets/images/founders/zeeshan.png";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 1, y: 10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
@@ -24,11 +24,9 @@ const AboutPage = () => {
       img: sauravImg,
       name: "Saurav Sharma",
       role: "Founder & CEO",
-      desc: `Operational Leadership: 10+ years managing teams of 25+, budgets, and complex projects at Lovely Professional University and Concentrix (ex-IBM). Expert in Operations, Process optimisation and quality assurance.
-Mind behind “Kiez-Konnektion”: Personally experienced the market gap as a student and professional in Berlin. Combines deep local insight with a strategic vision to solve a real community problem.
-Business & Academic Pedigree: Holds a Global MBA from Berlin School of Business and Innovation (BSBI), with certifications in Project Management, Six Sigma, Operations management, and Digital Marketing.
-Personal Motivation: This isn’t just our story, it’s the story of every 1 in 3 newcomers to Berlin.
-Planned Role: Vision, business strategy, partnerships, operations, fundraising, and impact.`,
+      desc: `Saurav brings over a decade of experience leading teams and managing complex projects in global organizations, including Lovely Professional University and Concentrix (ex-IBM).
+He personally experienced the gap for newcomers in Berlin and envisioned a platform that builds trust and community. He holds a Global MBA from BSBI with certifications in Project Management, Six Sigma, Operations Management, and Digital Marketing.
+Role: Vision, business strategy, partnerships, operations, fundraising, Team building and impact`,
     },
     {
       img: zeeshanImg,
@@ -62,15 +60,19 @@ Planned Role: End-to-end technical execution, platform architecture, security, a
         className="relative min-h-[75vh] flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${aboutImg})` }}
       >
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-        <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-soft backdrop-blur-lg bg-white/5 rounded-2xl shadow-xl p-10 border border-white/10">
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-soft backdrop-blur-sm bg-white/5 rounded-2xl shadow-xl p-10 border border-white/10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg"
           >
-            About <span className="text-orange-400">JobsPerHour Berlin</span>
+            
+            <span className="text-white">About Us</span><br />
+            <span className="inline-block px-4 py-1 rounded-lg bg-white/80 text-gray-900 backdrop-blur-sm shadow-lg">JobsPerHour<span className="text-orange-400">Berlin</span></span>
+            
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -101,13 +103,13 @@ Planned Role: End-to-end technical execution, platform architecture, security, a
           >
             <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">The Team Behind the Vision</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              JobsPerHour Berlin was founded by Saurav Sharma and Zeeshan Nazir, a duo united by firsthand experience of Berlin’s “isolation paradox” and a shared vision to build community through trusted, local work.
+              JobsPerHour Berlin was founded by Saurav Sharma and Zeeshan Nazir, a duo united by firsthand experience of Berlin’s “isolation paradox” and a shared vision to build community through local, trusted work.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              “When I first arrived in Berlin as a student, I saw talented people with so much to offer, but no way to connect meaningfully with the community around them. This platform is the bridge I wish I had.”
+              “When we first arrived in Berlin, we saw talented people with so much to offer, but no way to connect meaningfully with the community around them. This platform is the bridge we wish we had.”
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4 font-semibold">
-              Our Shared Goal: To turn strangers into neighbours, and neighbours into helpers, building a Berlin where no one feels invisible.
+             Our Goal: To turn strangers into neighbours, and neighbours into helpers, building a Berlin where no one feels invisible.
             </p>
           </motion.div>
           <motion.img
@@ -181,7 +183,7 @@ Planned Role: End-to-end technical execution, platform architecture, security, a
           </div>
         </div>
       </section>
-       <style>{`
+      <style>{`
         @keyframes fadeSoft {
           0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }

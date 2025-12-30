@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import logo from "../../assets/Images/Homepage/logo.png";
 import { HiMenu, HiX } from "react-icons/hi";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdNotificationsNone } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
@@ -19,9 +19,14 @@ const Navbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Example notifications array, replace with API data
+  const [notifications, setNotifications] = useState([]);
+
   const userMenuRef = useRef(null);
+  const notificationsRef = useRef(null);
 
   const isJobPoster =
     user && ["jobposter-private", "jobposter-company"].includes(user.role);
@@ -30,14 +35,24 @@ const Navbar = () => {
     if (!user) return "/";
     if (user.role === "admin") return "/admin-dashboard";
     if (["jobposter-private", "jobposter-company"].includes(user.role))
-      return "/poster-dashboard";
-    return "/seeker-dashboard";
+      return "/poster";
+    return "/seeker";
   };
 
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(e.target)
+      ) {
         setUserMenuOpen(false);
+      }
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(e.target)
+      ) {
+        setNotificationsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -67,22 +82,19 @@ const Navbar = () => {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-all ${
-          isScrolled
+        className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition-all ${isScrolled
             ? dark
               ? "bg-black/70 border-b border-gray-800"
               : "bg-white/70 border-b border-gray-200"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto h-16 px-6 flex items-center justify-between">
           {/* LOGO */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Jobs Per Hour" className="h-10" />
             <span className="font-bold text-xl">
-              <span className="text-gray-900 dark:text-white">
-                Jobs Per Hour
-              </span>
+              <span className="text-gray-900 dark:text-white">Jobs Per Hour</span>
               <span className="ml-1 text-orange-500">Berlin</span>
             </span>
           </Link>
@@ -95,6 +107,50 @@ const Navbar = () => {
             <NavLink to="/community" label={t("community")} />
             {isJobPoster && <NavLink to="/post-job" label={t("postJob")} />}
             <NavLink to="/contactUs" label={t("contactUs")} />
+
+            {/* NOTIFICATION ICON */}
+            {user && (
+              <li className="relative" ref={notificationsRef}>
+                <button
+                  onClick={() => setNotificationsOpen(!notificationsOpen)}
+                  className="text-2xl hover:text-orange-500 transition relative"
+                >
+                  <MdNotificationsNone />
+                  {notifications.length > 0 && (
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
+                      {notifications.length}
+                    </span>
+                  )}
+                </button>
+
+                <AnimatePresence>
+                  {notificationsOpen && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className={`absolute right-0 mt-3 w-64 rounded-xl shadow-xl p-4 z-50 ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+                        }`}
+                    >
+                      {notifications.length === 0 ? (
+                        <li className="px-4 py-2 text-gray-500 dark:text-gray-400">
+                          No notifications
+                        </li>
+                      ) : (
+                        notifications.map((notif, index) => (
+                          <li
+                            key={index}
+                            className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-md"
+                          >
+                            {notif.message}
+                          </li>
+                        ))
+                      )}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </li>
+            )}
 
             {/* USER MENU */}
             {user ? (
@@ -109,18 +165,15 @@ const Navbar = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className={`absolute right-0 mt-3 w-48 rounded-xl shadow-xl p-4 ${
-                        dark
-                          ? "bg-gray-900 text-white"
-                          : "bg-white text-gray-900"
-                      }`}
+                      className={`absolute right-0 mt-3 w-48 rounded-xl shadow-xl p-4 ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+                        }`}
                     >
                       <Link
                         to={getDashboardRoute()}
                         onClick={() => setUserMenuOpen(false)}
                         className="block py-2 hover:text-orange-500"
                       >
-                        {t("dashboard")}
+                        {t("Dashboard")}
                       </Link>
 
                       <button
@@ -159,7 +212,7 @@ const Navbar = () => {
             </button>
           </ul>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE MENU BUTTON */}
           <button
             className="md:hidden text-3xl text-orange-500"
             onClick={() => setMenuOpen(true)}
@@ -177,9 +230,8 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3 }}
-            className={`fixed top-0 right-0 h-full w-72 z-50 ${
-              dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-            }`}
+            className={`fixed top-0 right-0 h-full w-72 z-50 ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+              }`}
           >
             <div className="p-5 flex justify-between border-b">
               <img src={logo} className="h-10" />
@@ -202,11 +254,23 @@ const Navbar = () => {
               {user && (
                 <MobileLink
                   to={getDashboardRoute()}
-                  label={t("dashboard")}
+                  label={t("Dashboard")}
                   close={setMenuOpen}
                 />
               )}
+              {!user && (
+                <>
+                  <MobileLink to="/login" label={t("login")} close={setMenuOpen} />
 
+                  <Link
+                    to="/signup"
+                    onClick={() => setMenuOpen(false)}
+                    className="block text-center mt-2 px-4 py-2 bg-orange-500 text-white rounded-full"
+                  >
+                    {t("signup")}
+                  </Link>
+                </>
+              )}
               {user && (
                 <button
                   onClick={handleLogout}
@@ -224,7 +288,6 @@ const Navbar = () => {
 };
 
 /* ---------------- Reusable Links ---------------- */
-
 const NavLink = ({ to, label }) => (
   <li>
     <Link

@@ -30,7 +30,7 @@ const Footer = () => {
             
             {/* Quick Links */}
             <div>
-              <h3 className="text-xl font-semibold text-orange-400 mb-4">Quick Links</h3>
+              <h3 className="text-xl font-semibold text-orange-500 mb-4">Quick Links</h3>
               <ul className="space-y-2 text-gray-400">
                 {[
                   { label: "Home", to: "/" },
@@ -52,7 +52,7 @@ const Footer = () => {
 
             {/* Contact */}
             <div>
-              <h3 className="text-xl font-semibold text-orange-400 mb-4">Contact</h3>
+              <h3 className="text-xl font-semibold text-orange-500 mb-4">Contact</h3>
               <p className="flex items-center justify-center md:justify-start gap-2 text-gray-300 mb-2">
                 <FaPhoneAlt className="text-orange-500" /> +49 157 83716538 whatsapp
               </p>
@@ -64,7 +64,7 @@ const Footer = () => {
 
             {/* Socials */}
             <div>
-              <h3 className="text-xl font-semibold text-orange-400 mb-4">Follow Us</h3>
+              <h3 className="text-xl font-semibold text-orange-500 mb-4">Follow Us</h3>
               <div className="flex justify-center md:justify-start gap-5 text-2xl">
                 {[FaInstagram, FaLinkedin, FaFacebook].map((Icon, index) => (
                   <Icon

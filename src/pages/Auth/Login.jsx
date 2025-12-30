@@ -33,10 +33,10 @@ const Login = () => {
           break;
         case "jobposter-private":
         case "jobposter-company":
-          navigate("/poster-dashboard");
+          navigate("/poster");
           break;
         case "jobseeker":
-          navigate("/seeker-dashboard");
+          navigate("/seeker");
           break;
         default:
           navigate("/");

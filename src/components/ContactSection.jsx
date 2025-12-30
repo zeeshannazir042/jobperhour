@@ -15,7 +15,7 @@ const ContactSection = () => {
         {/* Card */}
         <div className="bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl p-10 shadow-xl hover:shadow-orange-300/40 transition">
           
-          <h2 className="text-3xl md:text-4xl font-extrabold text-orange-600 mb-4 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-orange-500 mb-4 animate-fade-in">
             Got Questions?
           </h2>
 

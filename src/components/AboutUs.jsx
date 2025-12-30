@@ -23,7 +23,7 @@ const AboutUs = () => {
         {/* Text Section */}
         <div className="md:w-1/2 text-white space-y-6">
           <h2 className="text-5xl font-extrabold tracking-wide">
-            About <span className="text-orange-400">Us</span>
+            About <span className="text-orange-500">Us</span>
           </h2>
 
           <p className="text-lg leading-relaxed">

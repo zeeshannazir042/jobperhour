@@ -6,19 +6,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: "/",            // Base public path
   server: {
-    port: 5173,            // Frontend dev port
-    strictPort: true,      // Fail if port 5173 is busy
-    open: true,            // Open browser on dev start
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000", // NestJS backend
-        changeOrigin: true,
-        secure: false,
-        // rewrite not needed if frontend and backend use same /api prefix
-      },
-    },
+    host: true,         // 👈 expose frontend to local network (mobile)
+    port: 5173,         // Frontend dev port
+    strictPort: true,   // Fail if port 5173 is busy
+    open: true,         // Open browser on dev start
+    // ✅ Remove proxy entirely for mobile/dev
+    // Mobile cannot use Vite proxy; use full API URL instead
   },
   build: {
-    outDir: "dist",        // Build output folder
+    outDir: "dist",     // Build output folder
   },
 });

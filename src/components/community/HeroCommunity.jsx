@@ -20,7 +20,7 @@ const HeroCommunity = () => {
           transition={{ duration: 1 }}
           className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg"
         >
-          Join Our <span className="text-orange-400">Community</span>
+          Join Our <span className="text-orange-500">Community</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -41,7 +41,7 @@ const HeroCommunity = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           href="/community"
-          className="mt-10 inline-block bg-orange-400 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition"
+          className="mt-10 inline-block bg-orange-500 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition"
         >
           Explore the Community
         </motion.a>
@@ -51,7 +51,7 @@ const HeroCommunity = () => {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.2, duration: 0.5 }}
-          className="mt-8 mx-auto h-1 w-24 bg-orange-400 rounded-full"
+          className="mt-8 mx-auto h-1 w-24 bg-orange-500 rounded-full"
         />
       </div>
 

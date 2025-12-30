@@ -83,7 +83,7 @@ const Register = () => {
         </p>
         <Link
           to="/login"
-          className="px-6 py-3 bg-orange-400 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
+          className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
         >
           Go to Login
         </Link>
@@ -116,7 +116,7 @@ const Register = () => {
               type="button"
               onClick={() => setUserType("jobseeker")}
               className={`px-4 py-2 rounded-lg font-semibold transition ${
-                userType === "jobseeker" ? "bg-orange-400 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                userType === "jobseeker" ? "bg-orange-500 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               Job Seeker
@@ -125,7 +125,7 @@ const Register = () => {
               type="button"
               onClick={() => setUserType("jobposter")}
               className={`px-4 py-2 rounded-lg font-semibold transition ${
-                userType === "jobposter" ? "bg-orange-400 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                userType === "jobposter" ? "bg-orange-500 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               Job Poster
@@ -139,7 +139,7 @@ const Register = () => {
                 type="button"
                 onClick={() => setPosterType("private")}
                 className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  posterType === "private" ? "bg-orange-400 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  posterType === "private" ? "bg-orange-500 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 Private
@@ -148,7 +148,7 @@ const Register = () => {
                 type="button"
                 onClick={() => setPosterType("business")}
                 className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  posterType === "business" ? "bg-orange-400 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  posterType === "business" ? "bg-orange-500 text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 Business / Company
@@ -252,7 +252,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
+              className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition"
             >
               Sign Up
             </button>
