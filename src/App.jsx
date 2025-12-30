@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 /* ---------------- Pages ---------------- */
 import Navbar from "./pages/Auth/Navigation";
@@ -48,6 +48,22 @@ import { AuthProvider } from "./context/AuthContext";
 import { UserProvider } from "./context/UserContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
+/* ---------------- Redirect Handler (GitHub Pages Fix) ---------------- */
+function RedirectHandler() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get("redirect");
+
+    if (redirect) {
+      navigate(redirect, { replace: true });
+    }
+  }, [navigate]);
+
+  return null;
+}
+
 function App() {
   return (
     <ThemeProvider>
@@ -56,6 +72,8 @@ function App() {
           <Navbar />
 
           <div className="pt-16">
+            <RedirectHandler />
+
             <Routes>
               {/* ---------------- Public Routes ---------------- */}
               <Route path="/" element={<Home />} />
@@ -90,7 +108,9 @@ function App() {
               <Route
                 path="/poster"
                 element={
-                  <PrivateRoute allowedRoles={["jobposter-private", "jobposter-company"]}>
+                  <PrivateRoute
+                    allowedRoles={["jobposter-private", "jobposter-company"]}
+                  >
                     <JobPosterDashboardLayout role="jobposter" />
                   </PrivateRoute>
                 }
