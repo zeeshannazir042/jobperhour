@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import communityImg from "../../assets/Images/community/herocommunity.jpg";
+import communityImg from "../../assets/Images/community/community-hero.jpeg";
 
 const HeroCommunity = () => {
   return (
