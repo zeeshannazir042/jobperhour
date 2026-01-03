@@ -101,12 +101,12 @@ const Navbar = () => {
 
           {/* DESKTOP MENU */}
           <ul className="hidden md:flex items-center space-x-6 font-medium">
-            <NavLink to="/" label={t("home")} />
-            <NavLink to="/about" label={t("About Us") || "About"} />
-            <NavLink to="/jobs" label={t("jobs")} />
-            <NavLink to="/community" label={t("community")} />
-            {isJobPoster && <NavLink to="/post-job" label={t("postJob")} />}
-            <NavLink to="/contactUs" label={t("contactUs")} />
+            <NavLink to="/" label={t("nav.home")} />
+            <NavLink to="/about" label={t("nav.about")} />
+            <NavLink to="/jobs" label={t("nav.jobs")} />
+            <NavLink to="/community" label={t("nav.community")} />
+            {isJobPoster && <NavLink to="/post-job" label={t("nav.postJob")} />}
+            <NavLink to="/contactUs" label={t("nav.contactUs")} />
 
             {/* NOTIFICATION ICON */}
             {user && (
@@ -188,12 +188,12 @@ const Navbar = () => {
               </li>
             ) : (
               <>
-                <Link to="/login">{t("login")}</Link>
+                <Link to="/login">{t("nav.login")}</Link>
                 <Link
                   to="/signup"
                   className="px-5 py-2 bg-orange-500 text-white rounded-full"
                 >
-                  {t("signup")}
+                  {t("nav.signup")}
                 </Link>
               </>
             )}
@@ -242,7 +242,7 @@ const Navbar = () => {
             </div>
 
             <ul className="p-5 space-y-4 text-lg">
-              <MobileLink to="/" label={t("home")} close={setMenuOpen} />
+              <MobileLink to="/" label={t("nav.home")} close={setMenuOpen} />
               <MobileLink to="/about" label={t("About Us") || "About"} close={setMenuOpen} />
               <MobileLink to="/jobs" label={t("jobs")} close={setMenuOpen} />
               <MobileLink to="/community" label={t("community")} close={setMenuOpen} />

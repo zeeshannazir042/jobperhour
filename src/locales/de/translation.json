@@ -1,12 +1,190 @@
 {
-  "home": "Startseite",
-  "jobs": "Jobs",
-  "community": "Community",
-  "postJob": "Job posten",
-  "contactUs": "Kontakt",
-  "profile": "Profil",
-  "settings": "Einstellungen",
-  "logout": "Abmelden",
-  "login": "Anmelden",
-  "signup": "Registrieren"
+ "nav": {
+    "home": "Startseite",
+    "jobs": "Jobs",
+    "about": "Über uns",
+    "community": "Gemeinschaft",
+    "postJob": "Job veröffentlichen",
+    "contactUs": "Kontakt",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "signup": "Registrieren"
+  },
+  "hero": {
+    "title": {
+      "before": "Entdecke",
+      "highlight": "Flexible Jobs",
+      "after": "in Berlin"
+    },
+    "subtitle": "Arbeite nach deinen Bedingungen. Vernetze dich mit lokalen Arbeitgebern. Werde schnell bezahlt.",
+    "browseJobs": "Jobs durchsuchen",
+    "postJob": "Job einstellen"
+  },
+  "featuredJobs": {
+    "title": "Top Jobs",
+    "subtitle": "Entdecke flexible und lokale Jobmöglichkeiten in Berlin — finde den passenden Job für dich!",
+    "categories": {
+      "household": {
+        "title": "Haushalt & Reinigung",
+        "subtitle": "Haushaltsjobs in Berlin",
+        "description": "Mach aus Chaos Gemütlichkeit! Reinigung, Wäsche und Bügeln — hilf Berliner Haushalten und verdiene zuverlässig."
+      },
+      "gardening": {
+        "title": "Garten & Außenbereich",
+        "subtitle": "Gartenjobs in Berlin",
+        "description": "Grüne Daumen gesucht! Rasen mähen, pflanzen oder Schnee räumen — arbeite an der frischen Luft."
+      },
+      "moving": {
+        "title": "Umzug & Transport",
+        "subtitle": "Umzugsjobs in Berlin",
+        "description": "Berlin in Bewegung — pack mit an! Möbel tragen, packen und verladen. Schnelle Jobs, schneller Lohn."
+      },
+      "restaurant": {
+        "title": "Restaurant & Café",
+        "subtitle": "Gastrojobs in Berlin",
+        "description": "Service, Küche oder Reinigung — werde Teil von Berlins lebendiger Gastronomieszene."
+      },
+      "childcare": {
+        "title": "Babysitting & Kinderbetreuung",
+        "subtitle": "Kinderbetreuung in Berlin",
+        "description": "Kleine Lächeln, große Wirkung! Babysitten, Nachhilfe oder Betreuung für Berliner Familien."
+      },
+      "petcare": {
+        "title": "Tierbetreuung",
+        "subtitle": "Tierjobs in Berlin",
+        "description": "Spazieren, füttern oder betreuen — verdiene Geld mit tierischen Begleitern."
+      },
+      "delivery": {
+        "title": "Lieferung & Kurier",
+        "subtitle": "Lieferjobs in Berlin",
+        "description": "Liefer Essen, Pakete oder Dokumente — flexibel, aktiv und ideal für Studierende."
+      },
+      "office": {
+        "title": "Büro & Verwaltung",
+        "subtitle": "Bürojobs in Berlin",
+        "description": "Unterstütze Startups und Unternehmen bei E-Mails, Datenpflege oder Empfang."
+      },
+      "tutoring": {
+        "title": "Nachhilfe & Unterricht",
+        "subtitle": "Nachhilfejobs in Berlin",
+        "description": "Teile dein Wissen — Englisch, Mathe oder andere Fächer, vor Ort oder online."
+      },
+      "event": {
+        "title": "Events & Promotion",
+        "subtitle": "Eventjobs in Berlin",
+        "description": "Hilf bei Konzerten, Messen und Festivals — ideal für offene, aktive Menschen."
+      },
+      "it": {
+        "title": "IT & Technischer Support",
+        "subtitle": "IT-Jobs in Berlin",
+        "description": "Unterstütze Unternehmen bei Technik, Websites und Softwareproblemen."
+      },
+      "creative": {
+        "title": "Kreativ & Design",
+        "subtitle": "Kreativjobs in Berlin",
+        "description": "Design, Fotografie, Video oder Content — setze deine kreativen Fähigkeiten ein."
+      }
+    }
+  },
+   "usefulHelp": { "button": "Nützliche Hilfe" },
+  "viewJob": { "button": "Job ansehen" },
+   "aboutUs": {
+    "title": "Über",
+    "highlight": "Uns",
+    "description": "JobsPerHourBerlin ist Berlins community-orientierte Plattform für Mikro-Jobs — verbindet Einheimische, Neuankömmlinge und Studenten mit sinnvollen Aufgaben in der Nachbarschaft.",
+    "whyChooseUs": "Warum uns wählen?",
+    "features": {
+      "hyperLocal": "Hyper-lokales Matching",
+      "trustedCommunity": "Vertrauenswürdiger Gemeinschaftsaustausch",
+      "flexibleWork": "Arbeiten wann du willst",
+      "bilingual": "Zweisprachige Plattform"
+    },
+    "cta": {
+      "findJobs": "Jobs finden",
+      "postJob": "Job veröffentlichen"
+    },
+    "imageAlt": "Gemeinschaft"
+  },
+   "blog": {
+    "title": "Lies unseren Blog",
+    "subtitle": "Hilfreiche Leitfäden für Jobsuchende, Studenten und Neuankömmlinge in Berlin — bleib informiert und vorbereitet.",
+    "posts": [
+      {
+        "category": "Studentenjobs",
+        "title": "Stundenjobs für Studenten in Berlin",
+        "date": "31.10.2025",
+        "author": "Admin",
+        "excerpt": "Entdecke die besten Stundenjobs für Studenten in Berlin — von Gastronomie, Nachhilfe, Lieferung bis Büroarbeit.",
+        "image": "student.jpg",
+        "link": "/blog/hourly-jobs-students-berlin"
+      },
+      {
+        "category": "Visum & Arbeit",
+        "title": "Visa- und Arbeitsmöglichkeiten für internationale Studenten",
+        "date": "20.10.2025",
+        "author": "Admin",
+        "excerpt": "Erfahre, wie internationale Studenten legal arbeiten, Geld verdienen und Stundenjobs finden können.",
+        "image": "visa.jpg",
+        "link": "/blog/visa-work-options"
+      },
+      {
+        "category": "Karriere-Tipps",
+        "title": "Studium und Arbeit effektiv ausbalancieren",
+        "date": "05.09.2025",
+        "author": "Admin",
+        "excerpt": "Lerne, wie du dein Studium managen und gleichzeitig Geld verdienen kannst — ohne auszubrennen.",
+        "image": "advice.jpg",
+        "link": "/blog/balancing-study-work"
+      }
+    ]
+  },
+   "blog": {
+    "title": "Unser Blog",
+    "subtitle": "Hilfreiche Anleitungen für Jobsuchende, Studenten und Neuankömmlinge in Berlin — immer informiert und vorbereitet.",
+    "readMore": "Mehr lesen ➜",
+    "posts": [
+      {
+        "category": "Studentenjobs",
+        "title": "Stundenjobs für Studenten in Berlin",
+        "date": "31.10.2025",
+        "author": "Admin",
+        "excerpt": "Entdecke die besten Stundenjobs für Studenten in Berlin — von Gastronomie, Nachhilfe, Lieferung bis Büroarbeit."
+      },
+      {
+        "category": "Visa & Arbeit",
+        "title": "Visa & Arbeitsmöglichkeiten für internationale Studenten",
+        "date": "20.10.2025",
+        "author": "Admin",
+        "excerpt": "Erfahre, wie internationale Studenten legal arbeiten, Geld verdienen und Stundenjobs finden können."
+      },
+      {
+        "category": "Karriereberatung",
+        "title": "Studium und Arbeit effektiv kombinieren",
+        "date": "05.09.2025",
+        "author": "Admin",
+        "excerpt": "Lerne, wie man Studium und Arbeit unter einen Hut bringt — ohne auszubrennen."
+      }
+    ]
+  },
+   "contact": {
+    "title": "Fragen?",
+    "subtitle": "Wir helfen Ihnen gerne — unser Team wird Ihnen schnell antworten.",
+    "button": "Kontaktieren Sie uns"
+  },
+  "footer": {
+    "quickLinks": "Schnellzugriff",
+    "contact": "Kontakt",
+    "followUs": "Folge uns",
+    "whatsapp": "WhatsApp",
+    "location": "Berlin, Deutschland",
+    "copyright": "Alle Rechte vorbehalten",
+    "links": {
+      "home": "Startseite",
+      "jobs": "Jobs",
+      "postJob": "Job veröffentlichen",
+      "contactUs": "Kontakt"
+    }
+  }
 }

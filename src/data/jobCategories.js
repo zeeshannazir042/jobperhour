@@ -1,6 +1,7 @@
 const jobCategories = [
     {
         id: 1,
+        key: "household",
         title: { en: "Household & Cleaning", de: "Haushalt & Reinigung" },
         icon: "🧹",
         tags: ["cleaning", "home", "maintenance", "reinigung", "haushalt"],
@@ -61,6 +62,7 @@ const jobCategories = [
     },
     {
         id: 2,
+        key: "restaurant",
         title: { en: "Restaurant & Café", de: "Restaurant & Café" },
         icon: "🍽️",
         tags: ["restaurant", "cafe", "food", "hospitality", "gastronomie"],
@@ -361,6 +363,7 @@ const jobCategories = [
     },
     {
         id: 7,
+        key: "childcare",
         title: { en: "Babysitting & Childcare", de: "Babysitting & Kinderbetreuung" },
         icon: "👶",
         tags: ["babysitting", "childcare", "kids", "kinderbetreuung"],
@@ -661,6 +664,7 @@ const jobCategories = [
     },
     {
         id: 12,
+        key: "creative",
         title: { en: "Creative & Design", de: "Kreativ & Design" },
         icon: "🎭",
         tags: ["creative", "design", "graphic", "kreativ"],
@@ -781,6 +785,7 @@ const jobCategories = [
     },
     {
         id: 14,
+         key: "delivery",
         title: { en: "Delivery & Courier", de: "Lieferung & Kurier" },
         icon: "📦",
         tags: ["delivery", "courier", "shipping", "lieferung"],
@@ -1021,6 +1026,7 @@ const jobCategories = [
     },
     {
         id: 18,
+        key: "event",
         title: { en: "Event & Promotion", de: "Event & Promotion" },
         icon: "🎪",
         tags: ["event", "promotion", "marketing", "veranstaltung"],
@@ -1201,6 +1207,7 @@ const jobCategories = [
     }
     , {
         id: 21,
+        key: "gardening",
         title: { en: "Gardening & Outdoor", de: "Gartenarbeit & Außenbereich" },
         icon: "🌿",
         tags: ["gardening", "outdoor", "landscaping", "gartenarbeit"],
@@ -1261,6 +1268,7 @@ const jobCategories = [
     },
     {
         id: 22,
+        key: "office",
         title: { en: "Office & Admin Support", de: "Regierung & Öffentliche Dienste" },
         icon: "🏛️",
         tags: ["government", "public services", "community", "regierung"],
@@ -1441,6 +1449,7 @@ const jobCategories = [
     },
     {
         id: 25,
+        key: "it",
         title: { en: "IT & Technical Support", de: "IT & Technischer Support" },
         icon: "💻",
         tags: ["IT", "tech support", "technology", "technik"],
@@ -1801,6 +1810,7 @@ const jobCategories = [
     },
     {
         id: 31,
+        key: "moving",
         title: {
             en: "Moving & Transport",
             de: "Umzug & Transport"
@@ -1847,6 +1857,7 @@ const jobCategories = [
     },
     {
         id: 32,
+        key: "petcare",
         title: {
             en: "Pet Care",
             de: "Tierbetreuung & Pflege"
@@ -1894,6 +1905,7 @@ const jobCategories = [
     },
     {
         id: 33,
+        key: "tutoring",
         title: { en: "Tutoring & Teaching", de: "Nachhilfe & Unterricht" },
         icon: "📚",
         tags: ["tutoring", "teaching", "education", "nachhilfe", "unterricht", "schule", "lernen"],

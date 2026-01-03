@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import heroVideo from "../../public/videos/video.mp4";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   const scrollToFeatured = () => {
     const section = document.getElementById("featured-jobs");
     if (section) {
@@ -27,7 +30,7 @@ const Hero = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
 
-      {/* Soft Particles Animation */}
+      {/* Soft Particles */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <div className="particle"></div>
         <div className="particle delay1"></div>
@@ -37,14 +40,15 @@ const Hero = () => {
       {/* Hero Content */}
       <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-soft backdrop-blur-lg bg-white/5 rounded-2xl shadow-xl p-10 border border-white/10">
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
-          Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-orange-500">
-            Flexible Jobs
+          {t("hero.title.before")}{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-orange-500">
+            {t("hero.title.highlight")}
           </span>{" "}
-          in Berlin
+          {t("hero.title.after")}
         </h1>
 
         <p className="text-lg md:text-xl text-gray-200 mt-4">
-          Work on your terms. Connect with local employers. Get paid fast.
+          {t("hero.subtitle")}
         </p>
 
         {/* CTA Buttons */}
@@ -53,14 +57,14 @@ const Hero = () => {
             to="/jobs"
             className="px-8 py-3 rounded-full text-white text-lg font-semibold bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg hover:shadow-orange-500/50 hover:scale-110 transition-all duration-300"
           >
-            🔍 Browse Jobs
+            🔍 {t("hero.browseJobs")}
           </Link>
 
           <Link
             to="/post-job"
             className="px-8 py-3 rounded-full border border-orange-400 text-orange-400 text-lg font-semibold hover:bg-orange-500 hover:text-white hover:scale-110 transition-all duration-300 shadow"
           >
-            ✨ Post a Job
+            ✨ {t("hero.postJob")}
           </Link>
         </div>
       </div>
@@ -73,7 +77,7 @@ const Hero = () => {
         ⬇
       </button>
 
-      {/* Custom Animations */}
+      {/* Animations */}
       <style>{`
         @keyframes fadeSoft {
           0% { opacity: 0; transform: translateY(20px); }
@@ -83,7 +87,6 @@ const Hero = () => {
           animation: fadeSoft 1.4s ease-out forwards;
         }
 
-        /* Floating particles */
         .particle {
           position: absolute;
           width: 10px;

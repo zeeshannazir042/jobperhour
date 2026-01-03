@@ -1,43 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { FaInstagram, FaLinkedin, FaFacebook, FaPhoneAlt, FaEnvelope, FaArrowUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowTopBtn(window.scrollY > 300);
-    };
+    const handleScroll = () => setShowTopBtn(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
+  const links = [
+    { label: t("footer.links.home"), to: "/" },
+    { label: t("footer.links.jobs"), to: "/jobs" },
+    { label: t("footer.links.postJob"), to: "/post-job" },
+    { label: t("footer.links.contactUs"), to: "/contact" },
+  ];
+
   return (
     <footer className="relative bg-[#0d0d0d] pt-20 pb-10 overflow-hidden">
-      
+
       {/* Animated Background glow */}
       <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-orange-500 opacity-20 blur-[140px]"></div>
 
       {/* Glass Container */}
       <div className="container mx-auto px-6">
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-10 shadow-lg transition hover:border-orange-400/30">
-          
+
           {/* Grid */}
           <div className="grid md:grid-cols-3 gap-10 text-center md:text-left">
-            
+
             {/* Quick Links */}
             <div>
-              <h3 className="text-xl font-semibold text-orange-500 mb-4">Quick Links</h3>
+              <h3 className="text-xl font-semibold text-orange-500 mb-4">{t("footer.quickLinks")}</h3>
               <ul className="space-y-2 text-gray-400">
-                {[
-                  { label: "Home", to: "/" },
-                  { label: "Jobs", to: "/jobs" },
-                  { label: "Post a Job", to: "/post-job" },
-                  { label: "Contact", to: "/contact" },
-                ].map(({ label, to }) => (
+                {links.map(({ label, to }) => (
                   <li key={label}>
                     <Link
                       to={to}
@@ -52,19 +54,19 @@ const Footer = () => {
 
             {/* Contact */}
             <div>
-              <h3 className="text-xl font-semibold text-orange-500 mb-4">Contact</h3>
+              <h3 className="text-xl font-semibold text-orange-500 mb-4">{t("footer.contact")}</h3>
               <p className="flex items-center justify-center md:justify-start gap-2 text-gray-300 mb-2">
-                <FaPhoneAlt className="text-orange-500" /> +49 157 83716538 whatsapp
+                <FaPhoneAlt className="text-orange-500" /> +49 157 83716538 {t("footer.whatsapp")}
               </p>
               <p className="flex items-center justify-center md:justify-start gap-2 text-gray-300 mb-2">
                 <FaEnvelope className="text-orange-500" /> contact@jobsperhourberlin.de
               </p>
-              <p className="text-gray-500">Berlin, Germany</p>
+              <p className="text-gray-500">{t("footer.location")}</p>
             </div>
 
             {/* Socials */}
             <div>
-              <h3 className="text-xl font-semibold text-orange-500 mb-4">Follow Us</h3>
+              <h3 className="text-xl font-semibold text-orange-500 mb-4">{t("footer.followUs")}</h3>
               <div className="flex justify-center md:justify-start gap-5 text-2xl">
                 {[FaInstagram, FaLinkedin, FaFacebook].map((Icon, index) => (
                   <Icon
@@ -81,7 +83,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} <span className="text-orange-500">JobsPerHourBerlin</span> — All Rights Reserved.
+            © {new Date().getFullYear()} <span className="text-orange-500">JobsPerHourBerlin</span> — {t("footer.copyright")}
           </p>
         </div>
       </div>

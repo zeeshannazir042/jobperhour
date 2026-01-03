@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { FiBriefcase, FiHelpCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import HelpPopup from "./HelpPopup";
-import { jobCategories as helpCategories } from "../data/jobCategories"; // HelpPopup data
+import { jobCategories as helpCategories } from "../data/jobCategories";
 
 const JobCard = ({ job }) => {
+  const { t, i18n } = useTranslation();
   const [showHelp, setShowHelp] = useState(false);
 
-  // Find category by matching title
-  const category = helpCategories.find(
-    (cat) => cat.title.en.toLowerCase() === job.title.toLowerCase()
-  );
+  // Find category by key
+  const category = helpCategories.find((cat) => cat.key === job.key);
 
   return (
     <>
       <div className="relative group rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/20">
-        
         {/* Image / Emoji */}
         <div className="flex justify-center items-center h-36 bg-gray-100 dark:bg-gray-700 overflow-hidden">
           {job.image ? (
@@ -25,9 +24,7 @@ const JobCard = ({ job }) => {
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
           ) : (
-            <div className="text-6xl animate-bounce-slow select-none">
-              {job.emoji}
-            </div>
+            <div className="text-6xl animate-bounce-slow select-none">{job.emoji}</div>
           )}
         </div>
 
@@ -49,20 +46,20 @@ const JobCard = ({ job }) => {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-3">
-            {/* Useful Help button */}
-            <button
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-transform hover:scale-105"
-              onClick={() => setShowHelp(true)}
-            >
-              <FiHelpCircle size={16} /> Useful Help
-            </button>
+            {category && (
+              <button
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-transform hover:scale-105"
+                onClick={() => setShowHelp(true)}
+              >
+                <FiHelpCircle size={16} /> {t("usefulHelp.button")}
+              </button>
+            )}
 
-            {/* View Job button as Link */}
             <Link
               to={`/jobs`}
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-orange-500 text-white shadow hover:shadow-orange-400/50 transition-transform hover:scale-105"
             >
-              <FiBriefcase size={16} /> View Job
+              <FiBriefcase size={16} /> {t("viewJob.button")}
             </Link>
           </div>
         </div>
@@ -70,10 +67,13 @@ const JobCard = ({ job }) => {
 
       {/* Help Popup */}
       {showHelp && category && (
-        <HelpPopup category={category} onClose={() => setShowHelp(false)} />
+        <HelpPopup
+          category={category}
+          lang={i18n.language} // pass selected language
+          onClose={() => setShowHelp(false)}
+        />
       )}
 
-      {/* Bounce animation */}
       <style>{`
         @keyframes bounceSlow {
           0%, 100% { transform: translateY(0); }

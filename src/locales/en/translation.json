@@ -1,12 +1,190 @@
 {
-  "home": "Home",
-  "jobs": "Jobs",
-  "community": "Community",
-  "postJob": "Post Job",
-  "contactUs": "Contact Us",
-  "profile": "Profile",
-  "settings": "Settings",
-  "logout": "Logout",
-  "login": "Login",
-  "signup": "Sign Up"
+  "nav": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "about": "About Us",
+    "community": "Community",
+    "postJob": "Post Job",
+    "contactUs": "Contact Us",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "hero": {
+    "title": {
+      "before": "Explore",
+      "highlight": "Flexible Jobs",
+      "after": "in Berlin"
+    },
+    "subtitle": "Work on your terms. Connect with local employers. Get paid fast.",
+    "browseJobs": "Browse Jobs",
+    "postJob": "Post a Job"
+  },
+   "featuredJobs": {
+    "title": "Featured Jobs",
+    "subtitle": "Explore flexible and local job opportunities in Berlin — find the right role for you!",
+    "categories": {
+      "household": {
+        "title": "Household & Cleaning",
+        "subtitle": "Household jobs in Berlin",
+        "description": "Turn Chaos into Cozy — Make Berlin Homes Shine! Apartment cleaning, laundry, ironing — help busy Berliners keep things spotless while earning steady pay."
+      },
+      "gardening": {
+        "title": "Gardening & Outdoor",
+        "subtitle": "Gardening jobs in Berlin",
+        "description": "Green Fingers Wanted — Grow, Trim, and Thrive! Lawn mowing, planting, or clearing snow — enjoy Berlin’s fresh air while helping gardens bloom."
+      },
+      "moving": {
+        "title": "Moving & Transport",
+        "subtitle": "Moving jobs in Berlin",
+        "description": "Berlin on the Move — Help Carry the City! Lend a hand with furniture, packing, and van loading. Fast jobs, fast pay, real teamwork."
+      },
+      "restaurant": {
+        "title": "Restaurant & Café",
+        "subtitle": "Restaurant jobs in Berlin",
+        "description": "Restaurant Hustle — Serve, Smile, and Soak Up the Vibes! Wait tables, assist in the kitchen, or clean up — be part of Berlin’s buzzing food scene."
+      },
+      "childcare": {
+        "title": "Babysitting & Childcare",
+        "subtitle": "Childcare jobs in Berlin",
+        "description": "Little Smiles, Big Hearts — Your Care Makes a Difference! Babysit, tutor, or nanny — help Berlin families with trusted childcare."
+      },
+      "petcare": {
+        "title": "Pet Care",
+        "subtitle": "Pet care jobs in Berlin",
+        "description": "Furry Friends Need You — Walk, Feed, or Cuddle! Dog walking, pet sitting, or feeding — earn money while spending time with animals."
+      },
+      "delivery": {
+        "title": "Delivery & Courier",
+        "subtitle": "Delivery jobs in Berlin",
+        "description": "Speed through Berlin on your bike or scooter — deliver food, parcels, or documents. Flexible hours and great for students who love being outdoors!"
+      },
+      "office": {
+        "title": "Office & Admin Support",
+        "subtitle": "Office support jobs in Berlin",
+        "description": "Assist Berlin’s startups and small businesses — handle data entry, emails, or reception tasks. Gain real office experience while earning hourly pay."
+      },
+      "tutoring": {
+        "title": "Tutoring & Teaching",
+        "subtitle": "Tutoring jobs in Berlin",
+        "description": "Share your knowledge! Teach English, math, or other subjects to students across Berlin — in-person or online, flexible scheduling available."
+      },
+      "event": {
+        "title": "Event & Promotion",
+        "subtitle": "Event jobs in Berlin",
+        "description": "Help organize Berlin’s concerts, exhibitions, and festivals — from ticketing and setup to guest management."
+      },
+      "it": {
+        "title": "IT & Technical Support",
+        "subtitle": "IT jobs in Berlin",
+        "description": "Work with local startups or tech companies — help with software updates, websites, or troubleshooting."
+      },
+      "creative": {
+        "title": "Creative & Design",
+        "subtitle": "Creative jobs in Berlin",
+        "description": "Put your artistic skills to use — graphic design, photography, video editing, or content creation."
+      }
+    }
+  },
+  "usefulHelp": { "button": "Useful Help" },
+  "viewJob": { "button": "View Job" },
+  "aboutUs": {
+    "title": "About",
+    "highlight": "Us",
+    "description": "JobsPerHourBerlin is Berlin's community-driven platform for micro jobs — connecting locals, newcomers and students with meaningful tasks around the neighborhood.",
+    "whyChooseUs": "Why Choose Us?",
+    "features": {
+      "hyperLocal": "Hyper-local matching",
+      "trustedCommunity": "Trusted community exchange",
+      "flexibleWork": "Work when you want",
+      "bilingual": "Bilingual platform"
+    },
+    "cta": {
+      "findJobs": "Find Jobs",
+      "postJob": "Post a Job"
+    },
+    "imageAlt": "Community"
+  },
+  "blog": {
+    "title": "Read Our Blog",
+    "subtitle": "Helpful guides for job seekers, students, and newcomers in Berlin — stay updated and prepared.",
+    "posts": [
+      {
+        "category": "Student Jobs",
+        "title": "Hourly Jobs for Students in Berlin",
+        "date": "31.10.2025",
+        "author": "Admin",
+        "excerpt": "Discover the top hourly jobs suitable for students in Berlin — from hospitality, tutoring, delivery, and office work.",
+        "image": "student.jpg",
+        "link": "/blog/hourly-jobs-students-berlin"
+      },
+      {
+        "category": "Visa & Work",
+        "title": "Visa & Work Options for International Students",
+        "date": "20.10.2025",
+        "author": "Admin",
+        "excerpt": "Learn how international students can legally work, earn, and find hourly jobs without hassle.",
+        "image": "visa.jpg",
+        "link": "/blog/visa-work-options"
+      },
+      {
+        "category": "Career Advice",
+        "title": "Balancing Study and Work Effectively",
+        "date": "05.09.2025",
+        "author": "Admin",
+        "excerpt": "Learn how to manage college life while earning money—without burning out.",
+        "image": "advice.jpg",
+        "link": "/blog/balancing-study-work"
+      }
+    ]
+  },
+"blog": {
+    "title": "Read Our Blog",
+    "subtitle": "Helpful guides for job seekers, students, and newcomers in Berlin — stay updated and prepared.",
+    "readMore": "Read More ➜",
+    "posts": [
+      {
+        "category": "Student Jobs",
+        "title": "Hourly Jobs for Students in Berlin",
+        "date": "31.10.2025",
+        "author": "Admin",
+        "excerpt": "Discover the top hourly jobs suitable for students in Berlin — from hospitality, tutoring, delivery, and office work."
+      },
+      {
+        "category": "Visa & Work",
+        "title": "Visa & Work Options for International Students",
+        "date": "20.10.2025",
+        "author": "Admin",
+        "excerpt": "Learn how international students can legally work, earn, and find hourly jobs without hassle."
+      },
+      {
+        "category": "Career Advice",
+        "title": "Balancing Study and Work Effectively",
+        "date": "05.09.2025",
+        "author": "Admin",
+        "excerpt": "Learn how to manage college life while earning money—without burning out."
+      }
+    ]
+  },
+   "contact": {
+    "title": "Got Questions?",
+    "subtitle": "We're here to help — reach out and our team will respond shortly.",
+    "button": "Contact Us"
+  },
+    "footer": {
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "whatsapp": "WhatsApp",
+    "location": "Berlin, Germany",
+    "copyright": "All Rights Reserved",
+    "links": {
+      "home": "Home",
+      "jobs": "Jobs",
+      "postJob": "Post a Job",
+      "contactUs": "Contact Us"
+    }
+  }
 }

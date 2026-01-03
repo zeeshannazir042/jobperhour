@@ -61,8 +61,10 @@ const categoryCards = [
       { icon: "🏋️", text: "Sports, Fitness & Outdoor Gear" },
       { icon: "🌱", text: "Garden Plants, Seeds & Supplies" },
       { icon: "🛠️", text: "Building Materials & DIY Tools" },
-      { icon: "🚲", text: "Vehicles & Bicycle Parts" },
-      { icon: "🐾", text: "Pet Supplies & Pet Items" },
+      { icon: "🎮", text: "Board Games & Hobby Kits" },
+      { icon: "🖼️", text: "Posters, Prints & Small Artwork" },
+      { icon: "🖊️", text: "Stationery & Office Supplies" },
+      { icon: "🎵", text: "Musical Instruments (non-motorized)" },
       { icon: "✨", text: "Other Free Stuff", bold: true },
     ],
   },
@@ -78,10 +80,15 @@ const categoryCards = [
       { icon: "🎓", text: "School & Library Donations" },
       {
         icon: "🌳",
-        text: "Community Project Support (e.g., gardens, parks)",
+        text: "Community Project Support (gardens, parks, murals, public space beautification)",
       },
-      { icon: "🩸", text: "Blood Donation Drives & Medical Donations" },
-      { icon: "🚨", text: "Emergency & Crisis Support" },
+      { icon: "📦", text: "Donation Drives for NGOs" },
+      { icon: "📖", text: "Book & Educational Material Donations" },
+      { icon: "♻️", text: "Recycling & Upcycling Projects for the community" },
+      {
+        icon: "🖼️",
+        text: "Public Awareness Campaigns (sustainability, literacy, social causes)",
+      },
       { icon: "✨", text: "Other Donation Causes", bold: true },
     ],
   },
@@ -91,20 +98,39 @@ const categoryCards = [
       "Lend a hand or get help with everyday tasks and projects.",
     color: "bg-orange-500",
     items: [
-      { icon: "🚚", text: "Help Moving & Transport" },
-      { icon: "🛠️", text: "Home Repairs & Assembly" },
-      { icon: "🌿", text: "Gardening & Yard Work" },
-      { icon: "🐶", text: "Pet Care, Dog Walking & Pet Sitting" },
+      { icon: "🌿", text: "Gardening & Yard Work (weeding, planting, harvesting)" },
       { icon: "💻", text: "Tech Help (Phone/PC Setup, Wi-Fi, Software)" },
-      { icon: "🎨", text: "Creative & Repair Skills" },
-      { icon: "🏪", text: "Setting Up a Stall at Kiez Flow Markt ✨" },
+      { icon: "🎨", text: "Creative & Repair Skills (painting, small DIY, crafts)" },
       { icon: "🧹", text: "Cleaning, Organizing & Decluttering" },
-      { icon: "👵", text: "Senior & Elderly Support" },
-      { icon: "👶", text: "Childcare & Babysitting" },
+      { icon: "📦", text: "Assistance with Moving Small Items (non-vehicle)" },
+      { icon: "🛋️", text: "Furniture Assembly & Basic Repairs" },
+      { icon: "🎉", text: "Event Setup & Community Activities" },
+      { icon: "📚", text: "Tutoring & Homework Help (non-professional, voluntary)" },
+      {
+        icon: "💡",
+        text: "Idea Sharing & Civic Initiatives (community forums, discussion circles)",
+      },
+      {
+        icon: "🧵",
+        text: "Skill & Craft Circles (sewing, knitting, woodworking groups)",
+      },
+      {
+        icon: "🌱",
+        text: "Urban Gardening & Tree Planting (community orchards, green spaces)",
+      },
+      {
+        icon: "📦",
+        text: "Community Supply Libraries / Tool Libraries (setup or maintenance)",
+      },
+      {
+        icon: "📖",
+        text: "Local History & Heritage Projects (documentation, restoration, awareness)",
+      },
       { icon: "✨", text: "Other Help & Tasks", bold: true },
     ],
   },
 ];
+
 
 const CommunityPage = () => {
   const { user } = useAuth();

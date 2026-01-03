@@ -43,8 +43,12 @@ const HelpPopup = ({ onClose, category, lang = "en" }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {category.vocabulary.map((word, idx) => (
                 <div key={idx} className="p-4 bg-gray-100 dark:bg-gray-800 rounded-xl border-l-4 border-orange-500 flex flex-col gap-1 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="font-semibold text-gray-800 dark:text-gray-100">{word.german}</span>
-                  <span className="text-gray-500 dark:text-gray-300 text-sm">{word.english}</span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-100">
+                    {lang === "de" ? word.german : word.english}
+                  </span>
+                  <span className="text-gray-500 dark:text-gray-300 text-sm">
+                    {lang === "de" ? word.english : word.german}
+                  </span>
                 </div>
               ))}
             </div>
@@ -54,8 +58,12 @@ const HelpPopup = ({ onClose, category, lang = "en" }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {category.phrases.map((phrase, idx) => (
                 <div key={idx} className="p-4 bg-gray-100 dark:bg-gray-800 rounded-xl border-l-4 border-orange-500 flex flex-col gap-1 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="font-semibold text-gray-800 dark:text-gray-100">{phrase.german}</span>
-                  <span className="text-gray-500 dark:text-gray-300 text-sm">{phrase.english}</span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-100">
+                    {lang === "de" ? phrase.german : phrase.english}
+                  </span>
+                  <span className="text-gray-500 dark:text-gray-300 text-sm">
+                    {lang === "de" ? phrase.english : phrase.german}
+                  </span>
                 </div>
               ))}
             </div>
