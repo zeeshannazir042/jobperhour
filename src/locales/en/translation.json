@@ -186,5 +186,193 @@
       "postJob": "Post a Job",
       "contactUs": "Contact Us"
     }
+  },
+  
+   "about": {
+    "heroTitle": "About Us",
+    "heroSubtitle": "A hyper-local platform connecting Berliners through trusted, flexible, neighbourhood-based work.",
+
+    "storyTitle": "The Team Behind the Vision",
+    "storyP1": "JobsPerHour Berlin was founded by Saurav Sharma and Zeeshan Nazir, a duo united by firsthand experience of Berlin’s isolation paradox and a shared vision to build community through local, trusted work.",
+    "storyP2": "When we first arrived in Berlin, we saw talented people with so much to offer, but no way to connect meaningfully with the community around them. This platform is the bridge we wish we had.",
+    "storyGoal": "Our Goal: To turn strangers into neighbours, and neighbours into helpers, building a Berlin where no one feels invisible.",
+
+    "missionVisionTitle": "Mission & Vision",
+
+    "missionTitle": "Mission Statement",
+    "missionText": "To turn Berlin’s isolation into connection by building a trusted, hyper-local platform where every neighbour can find help, offer skills, and belong.",
+
+    "visionTitle": "Vision Statement",
+    "visionText": "To become Europe’s leading community platform, redefining city life through trust, flexibility, and neighbourly support. JobsPerHour Berlin is the blueprint for a replicable model that turns hyper-local connections into scalable solutions for social integration and resilient local economies across Germany and Europe.",
+
+    "foundersTitle": "Founders & Leadership",
+
+    "founder1Role": "Founder & CEO",
+    "founder1Desc": "Saurav brings over a decade of experience leading teams and managing complex projects in global organizations, including Lovely Professional University and Concentrix (ex-IBM).\n\nHe personally experienced the challenges newcomers face in Berlin and envisioned a platform that builds trust and community.\n\nHe holds a Global MBA from BSBI with certifications in Project Management, Six Sigma, Operations Management, and Digital Marketing.\n\nRole: Vision, business strategy, partnerships, operations, fundraising, team building, and impact.",
+
+    "founder2Role": "Technical Co-Founder",
+    "founder2Desc": "Full-Stack Expertise: Proficient in React.js, Node.js, MongoDB, and cloud deployment — the exact stack needed to build and scale the platform.\n\nProven Project Builder: Built and deployed complex web applications including a Project Management Dashboard and an E-Commerce Platform handling high transaction volumes.\n\nResults-Driven Engineering: Optimized system performance, improving load speeds by 30% and reducing checkout times.\n\nPlanned Role: End-to-end technical execution, platform architecture, security, and scaling."
+  },
+   "comingSoon": {
+    "title": "Coming Soon",
+    "subtitle": "We’re working hard to launch our platform. Stay tuned and subscribe to get notified when we go live!",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "emailPlaceholder": "Enter your email",
+    "notify": "Notify Me",
+    "copyright": "© 2025 JobsPerHour Berlin. All rights reserved."
+  },
+  "exchangeCategories": "Exchange Categories",
+  "whyJoin": "Why Join?",
+  "currentActivities": "Current Activities",
+  "allCategories": "All Categories",
+  "createNewPost": "+ Create New Post",
+  "selectPostToView": "Select a post to view details.",
+  "noDescription": "No description",
+  "All Types": "All Types",
+  "Offer": "Offer",
+  "Request": "Request",
+
+  "Free Stuff 🎁": "Free Stuff 🎁",
+  "Donations & Giving Back ❤️": "Donations & Giving Back ❤️",
+  "Community & Events 🗓️": "Community & Events 🗓️",
+  "Skills & Knowledge Sharing 🧠": "Skills & Knowledge Sharing 🧠",
+  "Food & Garden 🌱": "Food & Garden 🌱",
+  "Help & Tasks 🤝": "Help & Tasks 🤝",
+
+  "benefits": {
+    "trust": {
+      "title": "Earn Community Trust",
+      "description": "Gain verified Community Points and Trust Badges by helping neighbors. Every successful exchange boosts your credibility within our network."
+    },
+    "connections": {
+      "title": "Forge Local Connections",
+      "description": "Meet like-minded neighbors in your Kiez. Share skills, lend resources, and build meaningful relationships that strengthen your local community."
+    },
+    "sustainability": {
+      "title": "Promote Sustainability",
+      "description": "Minimize waste by sharing and reusing items. Contribute to a greener, more resourceful community."
+    }
+  },
+
+  "categoryCards": {
+    "Free Stuff 🎁": {
+      "description": "Find new owners for things you no longer need and discover treasures for free.",
+      "items": {
+        "Furniture & Home Appliances": "Furniture & Home Appliances",
+        "Tech Gadgets & Electronics": "Tech Gadgets & Electronics",
+        "Clothes, Shoes & Accessories": "Clothes, Shoes & Accessories",
+        "Kids' Stuff, Toys & Baby Gear": "Kids' Stuff, Toys & Baby Gear",
+        "Books, Movies, Music & Games": "Books, Movies, Music & Games",
+        "Home Decor, Art & Crafts": "Home Decor, Art & Crafts",
+        "Sports, Fitness & Outdoor Gear": "Sports, Fitness & Outdoor Gear",
+        "Garden Plants, Seeds & Supplies": "Garden Plants, Seeds & Supplies",
+        "Building Materials & DIY Tools": "Building Materials & DIY Tools",
+        "Board Games & Hobby Kits": "Board Games & Hobby Kits",
+        "Posters, Prints & Small Artwork": "Posters, Prints & Small Artwork",
+        "Stationery & Office Supplies": "Stationery & Office Supplies",
+        "Musical Instruments (non-motorized)": "Musical Instruments (non-motorized)",
+        "Other Free Stuff": "Other Free Stuff"
+      }
+    },
+    "Donations & Giving Back ❤️": {
+      "description": "Support local causes and connect those in need with the generosity of the community.",
+      "items": {
+        "Food & Supplies for Food Banks": "Food & Supplies for Food Banks",
+        "Clothing & Toy Drives": "Clothing & Toy Drives",
+        "Support for Local Shelters (Animal/Homeless)": "Support for Local Shelters (Animal/Homeless)",
+        "School & Library Donations": "School & Library Donations",
+        "Community Project Support (gardens, parks, murals, public space beautification)": "Community Project Support (gardens, parks, murals, public space beautification)",
+        "Donation Drives for NGOs": "Donation Drives for NGOs",
+        "Book & Educational Material Donations": "Book & Educational Material Donations",
+        "Recycling & Upcycling Projects for the community": "Recycling & Upcycling Projects for the community",
+        "Public Awareness Campaigns (sustainability, literacy, social causes)": "Public Awareness Campaigns (sustainability, literacy, social causes)",
+        "Other Donation Causes": "Other Donation Causes"
+      }
+    },
+    "Help & Tasks 🤝": {
+      "description": "Lend a hand or get help with everyday tasks and projects.",
+      "items": {
+        "Gardening & Yard Work (weeding, planting, harvesting)": "Gardening & Yard Work (weeding, planting, harvesting)",
+        "Tech Help (Phone/PC Setup, Wi-Fi, Software)": "Tech Help (Phone/PC Setup, Wi-Fi, Software)",
+        "Creative & Repair Skills (painting, small DIY, crafts)": "Creative & Repair Skills (painting, small DIY, crafts)",
+        "Cleaning, Organizing & Decluttering": "Cleaning, Organizing & Decluttering",
+        "Assistance with Moving Small Items (non-vehicle)": "Assistance with Moving Small Items (non-vehicle)",
+        "Furniture Assembly & Basic Repairs": "Furniture Assembly & Basic Repairs",
+        "Event Setup & Community Activities": "Event Setup & Community Activities",
+        "Tutoring & Homework Help (non-professional, voluntary)": "Tutoring & Homework Help (non-professional, voluntary)",
+        "Idea Sharing & Civic Initiatives (community forums, discussion circles)": "Idea Sharing & Civic Initiatives (community forums, discussion circles)",
+        "Skill & Craft Circles (sewing, knitting, woodworking groups)": "Skill & Craft Circles (sewing, knitting, woodworking groups)",
+        "Urban Gardening & Tree Planting (community orchards, green spaces)": "Urban Gardening & Tree Planting (community orchards, green spaces)",
+        "Community Supply Libraries / Tool Libraries (setup or maintenance)": "Community Supply Libraries / Tool Libraries (setup or maintenance)",
+        "Local History & Heritage Projects (documentation, restoration, awareness)": "Local History & Heritage Projects (documentation, restoration, awareness)",
+        "Other Help & Tasks": "Other Help & Tasks"
+      }
+    }
+  },
+  "joinOur": "Join Our",
+  "community": "Community",
+  "communitySubtitle": "Connect with neighbours, share skills, offer help, and make Berlin a place where everyone belongs.",
+  "exploreCommunity": "Explore the Community",
+ "contact": {
+    "heroTitle": "Let’s Connect! Contact Us",
+    "heroSubtitle": "We’re here to help you find or post jobs easily. You can either fill out our Google Job Posting Form or reach out via the contact details below.",
+    "googleFormLink": "Post a Job via Google Form / Fill Job Form",
+    "phone": "+49 157 83716538 (WhatsApp)",
+    "email": "contact@jobsperhourberlin.de",
+    "address": "Berlin, Germany",
+    "sendMessage": "Send a Message",
+    "sendButton": "Send Message",
+    "messageSent": "Your message has been sent!",
+    "placeholders": {
+      "name": "Your Name*",
+      "email": "Your Email*",
+      "subject": "Subject",
+      "message": "Message"
+    }
+  },
+    "login": {
+    "welcomeTitle": "Welcome to JobsPerHourBerlin",
+    "welcomeSubtitle": "Log in and manage your jobs efficiently.",
+    "pageTitle": "Login to Your Account",
+    "emailPlaceholder": "Email Address",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "socialLoginGoogle": "Login with Google",
+    "socialLoginLinkedIn": "Login with LinkedIn",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "errorMessage": "Login failed. Please try again."
+  },
+   "register": {
+    "welcomeTitle": "Join JobsPerHourBerlin",
+    "welcomeSubtitle": "Find or post hourly jobs in Berlin easily.",
+    "pageTitle": "Sign Up",
+    "userTypeJobSeeker": "Job Seeker",
+    "userTypeJobPoster": "Job Poster",
+    "posterPrivate": "Private",
+    "posterBusiness": "Business / Company",
+    "fullName": "Full Name",
+    "contactPerson": "Contact Person Name",
+    "email": "Email",
+    "businessEmail": "Business Email",
+    "password": "Password",
+    "companyName": "Company Name",
+    "businessAddress": "Business Address",
+    "vat": "VAT / Tax ID (optional)",
+    "website": "Company Website (optional)",
+    "agreeInfo": "I agree to share my info for job-related purposes.",
+    "signUpButton": "Sign Up",
+    "socialGoogle": "Sign Up with Google",
+    "socialLinkedIn": "Sign Up with LinkedIn",
+    "alreadyAccount": "Already have an account?",
+    "login": "Login",
+    "checkEmailTitle": "Check Your Email",
+    "checkEmailMsg": "A verification email has been sent to {{email}}. Please check your inbox (and spam folder) to verify your account before logging in."
   }
+  
+  
 }

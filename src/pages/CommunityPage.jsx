@@ -1,11 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import PostDetail from "../components/community/PostDetail";
 import PostForm from "../components/community/PostForm";
 import HeroCommunity from "../components/community/HeroCommunity";
 import { getAllPosts } from "../api/communityApi";
 import { useAuth } from "../context/AuthContext";
 import Footer from "../components/Footer";
+
+// Map keywords to icons dynamically
+const iconMap = {
+  furniture: "🛋️",
+  tech: "💻",
+  clothes: "👕",
+  kids: "🧸",
+  books: "📚",
+  home: "🎨",
+  sports: "🏋️",
+  garden: "🌱",
+  diy: "🛠️",
+  board: "🎮",
+  posters: "🖼️",
+  stationery: "🖊️",
+  musical: "🎵",
+  food: "🍴",
+  donation: "📦",
+  school: "🎓",
+  community: "🌳",
+  recycling: "♻️",
+  awareness: "🖼️",
+  cleaning: "🧹",
+  techHelp: "💻",
+  creative: "🎨",
+  tutoring: "📚",
+  event: "🎉",
+  idea: "💡",
+  skill: "🧵",
+  urban: "🌱",
+  history: "📖",
+  other: "✨",
+};
+
+const postTypes = [
+  { value: "", label: "All Types" },
+  { value: "offer", label: "Offer" },
+  { value: "request", label: "Request" },
+];
 
 const categoryColors = {
   "Free Stuff 🎁": "bg-yellow-100 text-yellow-800",
@@ -15,124 +55,8 @@ const categoryColors = {
   "Food & Garden 🌱": "bg-green-100 text-green-700",
 };
 
-const postTypes = [
-  { value: "", label: "All Types" },
-  { value: "offer", label: "Offer" },
-  { value: "request", label: "Request" },
-];
-
-const benefitsData = [
-  {
-    title: "Earn Community Trust",
-    description:
-      "Gain verified Community Points and Trust Badges by helping neighbors. Every successful exchange boosts your credibility within our network.",
-    color: "from-orange-400 to-orange-600",
-    icon: "fa-solid fa-shield-check",
-  },
-  {
-    title: "Forge Local Connections",
-    description:
-      "Meet like-minded neighbors in your Kiez. Share skills, lend resources, and build meaningful relationships that strengthen your local community.",
-    color: "from-orange-400 to-orange-600",
-    icon: "fa-solid fa-users",
-  },
-  {
-    title: "Promote Sustainability",
-    description:
-      "Minimize waste by sharing and reusing items. Contribute to a greener, more resourceful community.",
-    color: "from-orange-400 to-orange-600",
-    icon: "fa-solid fa-leaf",
-  },
-];
-
-const categoryCards = [
-  {
-    title: "Free Stuff 🎁",
-    description:
-      "Find new owners for things you no longer need and discover treasures for free.",
-    color: "bg-orange-500",
-    items: [
-      { icon: "🛋️", text: "Furniture & Home Appliances" },
-      { icon: "💻", text: "Tech Gadgets & Electronics" },
-      { icon: "👕", text: "Clothes, Shoes & Accessories" },
-      { icon: "🧸", text: "Kids' Stuff, Toys & Baby Gear" },
-      { icon: "📚", text: "Books, Movies, Music & Games" },
-      { icon: "🎨", text: "Home Decor, Art & Crafts" },
-      { icon: "🏋️", text: "Sports, Fitness & Outdoor Gear" },
-      { icon: "🌱", text: "Garden Plants, Seeds & Supplies" },
-      { icon: "🛠️", text: "Building Materials & DIY Tools" },
-      { icon: "🎮", text: "Board Games & Hobby Kits" },
-      { icon: "🖼️", text: "Posters, Prints & Small Artwork" },
-      { icon: "🖊️", text: "Stationery & Office Supplies" },
-      { icon: "🎵", text: "Musical Instruments (non-motorized)" },
-      { icon: "✨", text: "Other Free Stuff", bold: true },
-    ],
-  },
-  {
-    title: "Donations & Giving Back ❤️",
-    description:
-      "Support local causes and connect those in need with the generosity of the community.",
-    color: "bg-orange-500",
-    items: [
-      { icon: "🍴", text: "Food & Supplies for Food Banks" },
-      { icon: "👕", text: "Clothing & Toy Drives" },
-      { icon: "🏠", text: "Support for Local Shelters (Animal/Homeless)" },
-      { icon: "🎓", text: "School & Library Donations" },
-      {
-        icon: "🌳",
-        text: "Community Project Support (gardens, parks, murals, public space beautification)",
-      },
-      { icon: "📦", text: "Donation Drives for NGOs" },
-      { icon: "📖", text: "Book & Educational Material Donations" },
-      { icon: "♻️", text: "Recycling & Upcycling Projects for the community" },
-      {
-        icon: "🖼️",
-        text: "Public Awareness Campaigns (sustainability, literacy, social causes)",
-      },
-      { icon: "✨", text: "Other Donation Causes", bold: true },
-    ],
-  },
-  {
-    title: "Help & Tasks 🤝",
-    description:
-      "Lend a hand or get help with everyday tasks and projects.",
-    color: "bg-orange-500",
-    items: [
-      { icon: "🌿", text: "Gardening & Yard Work (weeding, planting, harvesting)" },
-      { icon: "💻", text: "Tech Help (Phone/PC Setup, Wi-Fi, Software)" },
-      { icon: "🎨", text: "Creative & Repair Skills (painting, small DIY, crafts)" },
-      { icon: "🧹", text: "Cleaning, Organizing & Decluttering" },
-      { icon: "📦", text: "Assistance with Moving Small Items (non-vehicle)" },
-      { icon: "🛋️", text: "Furniture Assembly & Basic Repairs" },
-      { icon: "🎉", text: "Event Setup & Community Activities" },
-      { icon: "📚", text: "Tutoring & Homework Help (non-professional, voluntary)" },
-      {
-        icon: "💡",
-        text: "Idea Sharing & Civic Initiatives (community forums, discussion circles)",
-      },
-      {
-        icon: "🧵",
-        text: "Skill & Craft Circles (sewing, knitting, woodworking groups)",
-      },
-      {
-        icon: "🌱",
-        text: "Urban Gardening & Tree Planting (community orchards, green spaces)",
-      },
-      {
-        icon: "📦",
-        text: "Community Supply Libraries / Tool Libraries (setup or maintenance)",
-      },
-      {
-        icon: "📖",
-        text: "Local History & Heritage Projects (documentation, restoration, awareness)",
-      },
-      { icon: "✨", text: "Other Help & Tasks", bold: true },
-    ],
-  },
-];
-
-
 const CommunityPage = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -161,6 +85,52 @@ const CommunityPage = () => {
     return matchCategory && matchType;
   });
 
+  // Build category cards from translation JSON
+  const categoryCards = Object.keys(t("categoryCards", { returnObjects: true })).map(
+    (key) => {
+      const data = t(`categoryCards.${key}`, { returnObjects: true });
+      const items = Object.keys(data.items).map((item) => {
+        // Determine icon
+        let icon = iconMap.other; // default
+        const lower = item.toLowerCase();
+        for (const k in iconMap) {
+          if (lower.includes(k)) {
+            icon = iconMap[k];
+            break;
+          }
+        }
+        return { text: data.items[item], icon };
+      });
+      return {
+        title: t(key),
+        description: data.description,
+        color: "bg-orange-500",
+        items,
+      };
+    }
+  );
+
+  const benefitsData = [
+    {
+      title: t("benefits.trust.title"),
+      description: t("benefits.trust.description"),
+      color: "from-orange-400 to-orange-600",
+      icon: "fa-solid fa-shield-check",
+    },
+    {
+      title: t("benefits.connections.title"),
+      description: t("benefits.connections.description"),
+      color: "from-orange-400 to-orange-600",
+      icon: "fa-solid fa-users",
+    },
+    {
+      title: t("benefits.sustainability.title"),
+      description: t("benefits.sustainability.description"),
+      color: "from-orange-400 to-orange-600",
+      icon: "fa-solid fa-leaf",
+    },
+  ];
+
   return (
     <div className="bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
       <HeroCommunity />
@@ -168,7 +138,7 @@ const CommunityPage = () => {
       {/* ---------- EXCHANGE CATEGORIES ---------- */}
       <section className="max-w-7xl mx-auto py-24 px-6">
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-gray-800 dark:text-gray-100">
-          Exchange Categories
+          {t("exchangeCategories")}
         </h2>
 
         <div className="grid gap-10 md:grid-cols-3">
@@ -219,7 +189,7 @@ const CommunityPage = () => {
       {/* ---------- BENEFITS ---------- */}
       <section className="max-w-7xl mx-auto py-24 px-6 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-gray-900 dark:to-gray-800 rounded-3xl">
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-gray-800 dark:text-gray-100 relative">
-          Why Join?
+          {t("whyJoin")}
           <span className="absolute left-1/2 -bottom-2 w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-500 rounded-full transform -translate-x-1 animate-pulse"></span>
         </h2>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -250,7 +220,7 @@ const CommunityPage = () => {
       {/* ---------- CURRENT ACTIVITIES ---------- */}
       <section className="max-w-6xl mx-auto py-20 px-6">
         <h2 className="text-4xl font-extrabold text-center mb-8 text-gray-800 dark:text-gray-100">
-          Current Activities
+          {t("currentActivities")}
         </h2>
 
         {/* Filters */}
@@ -262,10 +232,10 @@ const CommunityPage = () => {
               setFilters((prev) => ({ ...prev, category: e.target.value }))
             }
           >
-            <option value="">All Categories</option>
+            <option value="">{t("allCategories")}</option>
             {Object.keys(categoryColors).map((cat) => (
               <option key={cat} value={cat}>
-                {cat}
+                {t(cat)}
               </option>
             ))}
           </select>
@@ -277,9 +247,9 @@ const CommunityPage = () => {
               setFilters((prev) => ({ ...prev, type: e.target.value }))
             }
           >
-            {postTypes.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label}
+            {postTypes.map((tType) => (
+              <option key={tType.value} value={tType.value}>
+                {t(tType.label)}
               </option>
             ))}
           </select>
@@ -292,7 +262,7 @@ const CommunityPage = () => {
               className="bg-gradient-to-r from-orange-400 to-orange-500 text-white px-8 py-3 rounded-full shadow-lg transition font-semibold"
               onClick={() => setShowForm(true)}
             >
-              + Create New Post
+              {t("createNewPost")}
             </motion.button>
           </div>
         )}
@@ -329,7 +299,7 @@ const CommunityPage = () => {
                     </span>
                   </div>
                   <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
-                    {post.description || "No description"}
+                    {post.description || t("noDescription")}
                   </p>
                 </motion.div>
               );
@@ -340,7 +310,7 @@ const CommunityPage = () => {
           <div className="w-full lg:w-2/3 h-[70vh] overflow-y-auto border border-gray-200 rounded-2xl p-6 bg-white dark:bg-gray-800 shadow-md scrollbar-thin scrollbar-thumb-orange-400 scrollbar-track-gray-100 transition-all">
             {!selectedPost ? (
               <p className="text-gray-600 dark:text-gray-300 text-center mt-20">
-                Select a post to view details.
+                {t("selectPostToView")}
               </p>
             ) : (
               <PostDetail

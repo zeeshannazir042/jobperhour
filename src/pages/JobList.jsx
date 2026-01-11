@@ -322,26 +322,36 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
-// Optional: You can add floating circles as background
+// Floating background circles
 const FloatingCircle = ({ size, x, y, delay }) => (
   <motion.div
     initial={{ y: 0, x: 0, opacity: 0.4 }}
     animate={{ y: [0, -20, 0], x: [0, 20, 0], opacity: [0.4, 0.8, 0.4] }}
     transition={{ duration: 6, repeat: Infinity, delay }}
-    className={`absolute rounded-full bg-white/20`}
+    className="absolute rounded-full bg-white/20"
     style={{ width: size, height: size, top: y, left: x }}
   />
 );
 
 const ComingSoon = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const { t } = useTranslation();
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
   const launchDate = new Date("2026-02-15T00:00:00");
 
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
       const diff = launchDate - now;
+
       if (diff > 0) {
         setTimeLeft({
           days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -353,26 +363,34 @@ const ComingSoon = () => {
         clearInterval(timer);
       }
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
+  const labels = [
+    t("comingSoon.days"),
+    t("comingSoon.hours"),
+    t("comingSoon.minutes"),
+    t("comingSoon.seconds"),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-orange-400 to-pink-500 overflow-hidden text-white px-6">
-      
-      {/* Floating Background Circles */}
+
+      {/* Floating Background */}
       <FloatingCircle size={100} x="10%" y="20%" delay={0} />
       <FloatingCircle size={150} x="70%" y="10%" delay={2} />
       <FloatingCircle size={80} x="50%" y="60%" delay={1} />
       <FloatingCircle size={120} x="20%" y="70%" delay={3} />
 
-      {/* Headline */}
+      {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="text-5xl md:text-6xl font-extrabold mb-6 text-center drop-shadow-lg"
       >
-        Coming Soon
+        {t("comingSoon.title")}
       </motion.h1>
 
       <motion.p
@@ -381,7 +399,7 @@ const ComingSoon = () => {
         transition={{ delay: 0.5, duration: 1 }}
         className="text-lg md:text-xl text-center mb-12 max-w-xl drop-shadow-md"
       >
-        We’re working hard to launch our platform. Stay tuned and subscribe to get notified when we go live!
+        {t("comingSoon.subtitle")}
       </motion.p>
 
       {/* Countdown */}
@@ -391,20 +409,27 @@ const ComingSoon = () => {
         transition={{ delay: 1, duration: 1 }}
         className="grid grid-cols-4 gap-4 text-center mb-12"
       >
-        {["Days", "Hours", "Minutes", "Seconds"].map((label, i) => (
+        {labels.map((label, i) => (
           <motion.div
             key={i}
             animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop", delay: i * 0.2 }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: i * 0.2,
+            }}
             className="bg-white/20 backdrop-blur-md rounded-xl p-4 min-w-[70px]"
           >
-            <p className="text-3xl font-bold">{Object.values(timeLeft)[i]}</p>
+            <p className="text-3xl font-bold">
+              {Object.values(timeLeft)[i]}
+            </p>
             <span className="text-sm uppercase">{label}</span>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Email Subscription */}
+      {/* Email */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -413,15 +438,15 @@ const ComingSoon = () => {
       >
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder={t("comingSoon.emailPlaceholder")}
           className="w-full p-4 rounded-lg text-gray-900 font-medium focus:outline-none"
         />
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="bg-white text-orange-500 font-bold px-6 py-4 rounded-lg transition-transform"
+          className="bg-white text-orange-500 font-bold px-6 py-4 rounded-lg"
         >
-          Notify Me
+          {t("comingSoon.notify")}
         </motion.button>
       </motion.div>
 
@@ -431,7 +456,7 @@ const ComingSoon = () => {
         transition={{ delay: 2, duration: 1 }}
         className="mt-12 text-sm text-white/80 text-center"
       >
-        &copy; 2025 JobsPerHour Berlin. All rights reserved.
+        {t("comingSoon.copyright")}
       </motion.p>
     </div>
   );

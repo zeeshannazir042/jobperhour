@@ -19,18 +19,18 @@ const ContactSection = () => {
         <div className="bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl p-10 shadow-xl hover:shadow-orange-300/40 transition">
           
           <h2 className="text-3xl md:text-4xl font-extrabold text-orange-500 mb-4 animate-fade-in">
-            {t("contact.title")}
+            {t("contact.heroTitle")}
           </h2>
 
           <p className="text-gray-700 text-lg mb-8 animate-fade-in delay-200">
-            {t("contact.subtitle")}
+            {t("contact.heroSubtitle")}
           </p>
 
           <Link
             to="/contact"
             className="inline-block px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-full shadow-lg hover:shadow-orange-600/50 transition-all hover:scale-110 active:scale-95"
           >
-            {t("contact.button")}
+            {t("contact.sendButton")}
           </Link>
         </div>
       </div>

@@ -1,11 +1,12 @@
-// src/pages/Auth/Login.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import pic from "../../assets/Images/signup/signup.jpg";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation(); // i18n
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -23,10 +24,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // Use AuthContext login method
       const data = await login(formData);
-
-      // Navigate based on user role
       switch (data.user.role) {
         case "admin":
           navigate("/admin-dashboard");
@@ -40,11 +38,10 @@ const Login = () => {
           break;
         default:
           navigate("/");
-          break;
       }
     } catch (err) {
       setErrorMessage(
-        err?.response?.data?.message || err.message || "Login failed. Please try again."
+        err?.response?.data?.message || err.message || t("login.errorMessage")
       );
     } finally {
       setLoading(false);
@@ -52,7 +49,7 @@ const Login = () => {
   };
 
   const handleSocialLogin = (provider) => {
-    alert(`Login with ${provider} coming soon!`);
+    alert(`${t("login.socialLogin" + provider)} coming soon!`);
   };
 
   return (
@@ -60,28 +57,18 @@ const Login = () => {
 
       {/* Left Image */}
       <div className="md:w-1/2 hidden md:flex relative overflow-hidden">
-        <img
-          src={pic}
-          alt="Login Illustration"
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
+        <img src={pic} alt="Login Illustration" className="absolute top-0 left-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
-          <h1 className="text-white text-4xl font-bold text-center animate-fade-up">
-            Welcome to JobsPerHourBerlin
-          </h1>
-          <p className="text-white/80 mt-4 text-center animate-fade-up delay-200">
-            Log in and manage your jobs efficiently.
-          </p>
+          <h1 className="text-white text-4xl font-bold text-center animate-fade-up">{t("login.welcomeTitle")}</h1>
+          <p className="text-white/80 mt-4 text-center animate-fade-up delay-200">{t("login.welcomeSubtitle")}</p>
         </div>
       </div>
 
       {/* Right Login Form */}
       <div className="md:w-1/2 flex items-center justify-center bg-white px-6 py-12">
         <div className="w-full max-w-md animate-fade-right">
-          <h2 className="text-4xl font-bold text-orange-500 mb-6 text-center">
-            Login to Your Account
-          </h2>
+          <h2 className="text-4xl font-bold text-orange-500 mb-6 text-center">{t("login.pageTitle")}</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
@@ -90,7 +77,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="Email Address"
+                placeholder={t("login.emailPlaceholder")}
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -104,16 +91,13 @@ const Login = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Password"
+                placeholder={t("login.passwordPlaceholder")}
                 value={formData.password}
                 onChange={handleChange}
                 required
                 className="w-full outline-none bg-transparent pr-10"
               />
-              <span
-                className="absolute right-3 cursor-pointer text-gray-400 hover:text-orange-500 transition"
-                onClick={() => setShowPassword(!showPassword)}
-              >
+              <span className="absolute right-3 cursor-pointer text-gray-400 hover:text-orange-500 transition" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
@@ -127,7 +111,7 @@ const Login = () => {
               disabled={loading}
               className={`w-full py-3 font-semibold rounded-lg text-white bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg hover:scale-105 transform transition-all ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? t("login.loggingIn") : t("login.loginButton")}
             </button>
           </form>
 
@@ -138,23 +122,21 @@ const Login = () => {
               onClick={() => handleSocialLogin("Google")}
               className="flex items-center justify-center gap-2 w-full py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
             >
-              <FaGoogle className="text-red-500" /> Login with Google
+              <FaGoogle className="text-red-500" /> {t("login.socialLoginGoogle")}
             </button>
             <button
               type="button"
               onClick={() => handleSocialLogin("LinkedIn")}
               className="flex items-center justify-center gap-2 w-full py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
             >
-              <FaLinkedin className="text-blue-700" /> Login with LinkedIn
+              <FaLinkedin className="text-blue-700" /> {t("login.socialLoginLinkedIn")}
             </button>
           </div>
 
           {/* Sign Up Link */}
           <p className="text-gray-500 text-sm text-center mt-6">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-orange-500 font-semibold hover:underline">
-              Sign Up
-            </Link>
+            {t("login.noAccount")}{" "}
+            <Link to="/signup" className="text-orange-500 font-semibold hover:underline">{t("login.signUp")}</Link>
           </p>
         </div>
       </div>

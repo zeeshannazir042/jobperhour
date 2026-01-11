@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import communityImg from "../../assets/Images/community/community-hero.jpeg";
+import { useTranslation } from "react-i18next";
 
 const HeroCommunity = () => {
+  const { t } = useTranslation();
+
   return (
     <section
       className="relative min-h-[80vh] flex items-center justify-center bg-cover bg-center"
@@ -20,7 +23,7 @@ const HeroCommunity = () => {
           transition={{ duration: 1 }}
           className="text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg"
         >
-          Join Our <span className="text-orange-500">Community</span>
+          {t("joinOur")} <span className="text-orange-500">{t("community")}</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -30,7 +33,7 @@ const HeroCommunity = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-200 drop-shadow-md"
         >
-          Connect with neighbours, share skills, offer help, and make Berlin a place where everyone belongs.
+          {t("communitySubtitle")}
         </motion.p>
 
         {/* Call-to-action Button */}
@@ -43,7 +46,7 @@ const HeroCommunity = () => {
           href="/community"
           className="mt-10 inline-block bg-orange-500 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition"
         >
-          Explore the Community
+          {t("exploreCommunity")}
         </motion.a>
 
         {/* Decorative Accent Line */}
@@ -54,8 +57,6 @@ const HeroCommunity = () => {
           className="mt-8 mx-auto h-1 w-24 bg-orange-500 rounded-full"
         />
       </div>
-
-      
     </section>
   );
 };

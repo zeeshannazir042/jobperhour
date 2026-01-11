@@ -186,5 +186,190 @@
       "postJob": "Job veröffentlichen",
       "contactUs": "Kontakt"
     }
+  },
+  "about": {
+    "heroTitle": "Über uns",
+    "heroSubtitle": "Eine hyper-lokale Plattform, die Berliner durch vertrauensvolle, flexible und nachbarschaftsbasierte Arbeit verbindet.",
+
+    "storyTitle": "Das Team hinter der Vision",
+    "storyP1": "JobsPerHour Berlin wurde von Saurav Sharma und Zeeshan Nazir gegründet – vereint durch ihre eigenen Erfahrungen mit Berlins Isolationsparadoxon und eine gemeinsame Vision, Gemeinschaft durch lokale und vertrauensvolle Arbeit aufzubauen.",
+    "storyP2": "Als wir nach Berlin kamen, sahen wir talentierte Menschen mit großem Potenzial, aber ohne echte Möglichkeit, sich sinnvoll mit ihrer Nachbarschaft zu verbinden. Diese Plattform ist die Brücke, die wir uns damals gewünscht hätten.",
+    "storyGoal": "Unser Ziel: Fremde zu Nachbarn zu machen und Nachbarn zu Helfern – für ein Berlin, in dem sich niemand unsichtbar fühlt.",
+
+    "missionVisionTitle": "Mission & Vision",
+
+    "missionTitle": "Unsere Mission",
+    "missionText": "Berlins Isolation in Verbindung zu verwandeln, indem wir eine vertrauensvolle, hyper-lokale Plattform schaffen, auf der jeder Nachbar Hilfe finden, Fähigkeiten anbieten und dazugehören kann.",
+
+    "visionTitle": "Unsere Vision",
+    "visionText": "Europas führende Community-Plattform zu werden und das Stadtleben durch Vertrauen, Flexibilität und nachbarschaftliche Unterstützung neu zu definieren. JobsPerHour Berlin ist der Prototyp eines skalierbaren Modells, das lokale Verbindungen in nachhaltige Lösungen für soziale Integration und widerstandsfähige lokale Wirtschaften in Deutschland und Europa verwandelt.",
+
+    "foundersTitle": "Gründer & Führung",
+
+    "founder1Role": "Gründer & CEO",
+    "founder1Desc": "Saurav bringt über ein Jahrzehnt Erfahrung in der Führung von Teams und im Management komplexer Projekte in internationalen Organisationen mit, darunter die Lovely Professional University und Concentrix (ehemals IBM).\n\nEr erlebte selbst die Herausforderungen, denen Neuankömmlinge in Berlin begegnen, und entwickelte die Vision einer Plattform, die Vertrauen schafft und Gemeinschaft fördert.\n\nEr besitzt einen Global MBA von der BSBI sowie Zertifizierungen in Projektmanagement, Six Sigma, Operations Management und Digital Marketing.\n\nRolle: Vision, Geschäftsstrategie, Partnerschaften, operative Abläufe, Fundraising, Teambuilding und gesellschaftliche Wirkung.",
+
+    "founder2Role": "Technischer Mitgründer",
+    "founder2Desc": "Full-Stack-Expertise: Fundierte Kenntnisse in React.js, Node.js, MongoDB und Cloud-Deployment – genau der Technologie-Stack, der für den Aufbau und die Skalierung der Plattform erforderlich ist.\n\nErfahrener Projektentwickler: Entwicklung und Bereitstellung komplexer Webanwendungen, darunter ein Projektmanagement-Dashboard und eine E-Commerce-Plattform mit hohem Transaktionsvolumen.\n\nErgebnisorientierte Entwicklung: Optimierung der Systemleistung mit einer Verbesserung der Ladezeiten um 30 % und einer deutlichen Reduzierung der Checkout-Zeiten.\n\nGeplante Rolle: End-to-End technische Umsetzung, Plattformarchitektur, Sicherheit und Skalierung."
+  },
+   "comingSoon": {
+    "title": "Demnächst verfügbar",
+    "subtitle": "Wir arbeiten intensiv an der Einführung unserer Plattform. Bleiben Sie dran und abonnieren Sie, um beim Start benachrichtigt zu werden!",
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "seconds": "Sekunden",
+    "emailPlaceholder": "E-Mail-Adresse eingeben",
+    "notify": "Benachrichtigen",
+    "copyright": "© 2025 JobsPerHour Berlin. Alle Rechte vorbehalten."
+  },
+  "exchangeCategories": "Tauschkategorien",
+  "whyJoin": "Warum Mitmachen?",
+  "currentActivities": "Aktuelle Aktivitäten",
+  "allCategories": "Alle Kategorien",
+  "createNewPost": "+ Neuen Beitrag erstellen",
+  "selectPostToView": "Wählen Sie einen Beitrag aus, um Details anzuzeigen.",
+  "noDescription": "Keine Beschreibung",
+  "All Types": "Alle Typen",
+  "Offer": "Angebot",
+  "Request": "Anfrage",
+
+  "Free Stuff 🎁": "Kostenloses 🎁",
+  "Donations & Giving Back ❤️": "Spenden & Zurückgeben ❤️",
+  "Community & Events 🗓️": "Community & Veranstaltungen 🗓️",
+  "Skills & Knowledge Sharing 🧠": "Fähigkeiten & Wissensaustausch 🧠",
+  "Food & Garden 🌱": "Essen & Garten 🌱",
+  "Help & Tasks 🤝": "Hilfe & Aufgaben 🤝",
+
+  "benefits": {
+    "trust": {
+      "title": "Gemeinschaftsvertrauen gewinnen",
+      "description": "Erhalten Sie verifizierte Community-Punkte und Vertrauensabzeichen, indem Sie Nachbarn helfen. Jeder erfolgreiche Austausch stärkt Ihre Glaubwürdigkeit im Netzwerk."
+    },
+    "connections": {
+      "title": "Lokale Verbindungen knüpfen",
+      "description": "Treffen Sie gleichgesinnte Nachbarn in Ihrem Kiez. Teilen Sie Fähigkeiten, leihen Sie Ressourcen aus und bauen Sie bedeutungsvolle Beziehungen auf."
+    },
+    "sustainability": {
+      "title": "Nachhaltigkeit fördern",
+      "description": "Minimieren Sie Abfall durch Teilen und Wiederverwenden von Gegenständen. Tragen Sie zu einer grüneren, nachhaltigeren Gemeinschaft bei."
+    }
+  },
+
+  "categoryCards": {
+    "Free Stuff 🎁": {
+      "description": "Finden Sie neue Besitzer für Dinge, die Sie nicht mehr brauchen, und entdecken Sie Schätze kostenlos.",
+      "items": {
+        "Furniture & Home Appliances": "Möbel & Haushaltsgeräte",
+        "Tech Gadgets & Electronics": "Technik & Elektronik",
+        "Clothes, Shoes & Accessories": "Kleidung, Schuhe & Accessoires",
+        "Kids' Stuff, Toys & Baby Gear": "Kinderartikel, Spielzeug & Babyausstattung",
+        "Books, Movies, Music & Games": "Bücher, Filme, Musik & Spiele",
+        "Home Decor, Art & Crafts": "Wohnkultur, Kunst & Handwerk",
+        "Sports, Fitness & Outdoor Gear": "Sport, Fitness & Outdoor-Ausrüstung",
+        "Garden Plants, Seeds & Supplies": "Gartenpflanzen, Samen & Zubehör",
+        "Building Materials & DIY Tools": "Baumaterialien & DIY-Werkzeuge",
+        "Board Games & Hobby Kits": "Brettspiele & Hobby-Sets",
+        "Posters, Prints & Small Artwork": "Poster, Drucke & kleine Kunstwerke",
+        "Stationery & Office Supplies": "Schreibwaren & Büromaterial",
+        "Musical Instruments (non-motorized)": "Musikinstrumente (nicht motorisiert)",
+        "Other Free Stuff": "Sonstiges Kostenloses"
+      }
+    },
+    "Donations & Giving Back ❤️": {
+      "description": "Unterstützen Sie lokale Zwecke und verbinden Sie Bedürftige mit der Großzügigkeit der Gemeinschaft.",
+      "items": {
+        "Food & Supplies for Food Banks": "Lebensmittel & Vorräte für Tafeln",
+        "Clothing & Toy Drives": "Kleider- & Spielzeugsammlungen",
+        "Support for Local Shelters (Animal/Homeless)": "Unterstützung für lokale Unterkünfte (Tiere/Obdachlose)",
+        "School & Library Donations": "Spenden für Schulen & Bibliotheken",
+        "Community Project Support (gardens, parks, murals, public space beautification)": "Unterstützung von Community-Projekten (Gärten, Parks, Wandbilder, Verschönerung öffentlicher Räume)",
+        "Donation Drives for NGOs": "Spendenaktionen für NGOs",
+        "Book & Educational Material Donations": "Buch- & Lernmaterialspenden",
+        "Recycling & Upcycling Projects for the community": "Recycling- & Upcycling-Projekte für die Gemeinschaft",
+        "Public Awareness Campaigns (sustainability, literacy, social causes)": "Öffentlichkeitskampagnen (Nachhaltigkeit, Bildung, soziale Zwecke)",
+        "Other Donation Causes": "Weitere Spendenaktionen"
+      }
+    },
+    "Help & Tasks 🤝": {
+      "description": "Leihen Sie eine Hand oder erhalten Sie Hilfe bei alltäglichen Aufgaben und Projekten.",
+      "items": {
+        "Gardening & Yard Work (weeding, planting, harvesting)": "Garten- & Hofarbeit (Unkraut jäten, Pflanzen, Ernten)",
+        "Tech Help (Phone/PC Setup, Wi-Fi, Software)": "Technikhilfe (Telefon/PC Einrichtung, WLAN, Software)",
+        "Creative & Repair Skills (painting, small DIY, crafts)": "Kreative & Reparaturfähigkeiten (Malen, kleine DIY-Projekte, Basteln)",
+        "Cleaning, Organizing & Decluttering": "Reinigung, Organisation & Entrümpelung",
+        "Assistance with Moving Small Items (non-vehicle)": "Hilfe beim Transport kleiner Gegenstände (ohne Fahrzeug)",
+        "Furniture Assembly & Basic Repairs": "Möbelmontage & kleine Reparaturen",
+        "Event Setup & Community Activities": "Veranstaltungsaufbau & Community-Aktivitäten",
+        "Tutoring & Homework Help (non-professional, voluntary)": "Nachhilfe & Hausaufgabenhilfe (freiwillig, nicht professionell)",
+        "Idea Sharing & Civic Initiatives (community forums, discussion circles)": "Ideenaustausch & Bürgerinitiativen (Community-Foren, Diskussionskreise)",
+        "Skill & Craft Circles (sewing, knitting, woodworking groups)": "Fähigkeits- & Handwerkskreise (Nähen, Stricken, Holzarbeiten)",
+        "Urban Gardening & Tree Planting (community orchards, green spaces)": "Urban Gardening & Baumpflanzungen (Gemeinschaftsgärten, Grünflächen)",
+        "Community Supply Libraries / Tool Libraries (setup or maintenance)": "Gemeinschaftsbibliotheken / Werkzeugbibliotheken (Aufbau oder Wartung)",
+        "Local History & Heritage Projects (documentation, restoration, awareness)": "Projekte zur lokalen Geschichte & Erbe (Dokumentation, Restaurierung, Bewusstsein)",
+        "Other Help & Tasks": "Weitere Hilfe & Aufgaben"
+      }
+    }
+  },
+   "joinOur": "Treten Sie unserer",
+  "community": "Community bei",
+  "communitySubtitle": "Verbinden Sie sich mit Nachbarn, teilen Sie Fähigkeiten, bieten Sie Hilfe an und machen Sie Berlin zu einem Ort, an dem jeder dazugehört.",
+  "exploreCommunity": "Community erkunden",
+   "contact": {
+    "heroTitle": "Lassen Sie uns verbinden! Kontaktieren Sie uns",
+    "heroSubtitle": "Wir helfen Ihnen, Jobs einfach zu finden oder zu posten. Sie können entweder unser Google Job Posting Formular ausfüllen oder über die untenstehenden Kontaktdaten mit uns in Verbindung treten.",
+    "googleFormLink": "Job über Google Formular posten / Jobformular ausfüllen",
+    "phone": "+49 157 83716538 (WhatsApp)",
+    "email": "contact@jobsperhourberlin.de",
+    "address": "Berlin, Deutschland",
+    "sendMessage": "Nachricht senden",
+    "sendButton": "Nachricht senden",
+    "messageSent": "Ihre Nachricht wurde gesendet!",
+    "placeholders": {
+      "name": "Ihr Name*",
+      "email": "Ihre E-Mail*",
+      "subject": "Betreff",
+      "message": "Nachricht"
+    }
+  },
+   "login": {
+    "welcomeTitle": "Willkommen bei JobsPerHourBerlin",
+    "welcomeSubtitle": "Melden Sie sich an und verwalten Sie Ihre Jobs effizient.",
+    "pageTitle": "Melden Sie sich in Ihrem Konto an",
+    "emailPlaceholder": "E-Mail-Adresse",
+    "passwordPlaceholder": "Passwort",
+    "loginButton": "Anmelden",
+    "loggingIn": "Anmeldung...",
+    "socialLoginGoogle": "Mit Google anmelden",
+    "socialLoginLinkedIn": "Mit LinkedIn anmelden",
+    "noAccount": "Sie haben kein Konto?",
+    "signUp": "Registrieren",
+    "errorMessage": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
+   "register": {
+    "welcomeTitle": "Treten Sie JobsPerHourBerlin bei",
+    "welcomeSubtitle": "Finden oder posten Sie stundenweise Jobs in Berlin einfach.",
+    "pageTitle": "Registrieren",
+    "userTypeJobSeeker": "Job Suchender",
+    "userTypeJobPoster": "Job Anbieter",
+    "posterPrivate": "Privat",
+    "posterBusiness": "Business / Unternehmen",
+    "fullName": "Vollständiger Name",
+    "contactPerson": "Name der Kontaktperson",
+    "email": "E-Mail",
+    "businessEmail": "Geschäfts-E-Mail",
+    "password": "Passwort",
+    "companyName": "Firmenname",
+    "businessAddress": "Firmenadresse",
+    "vat": "USt-IdNr. (optional)",
+    "website": "Firmenwebseite (optional)",
+    "agreeInfo": "Ich stimme zu, dass meine Daten für Jobzwecke verwendet werden.",
+    "signUpButton": "Registrieren",
+    "socialGoogle": "Mit Google registrieren",
+    "socialLinkedIn": "Mit LinkedIn registrieren",
+    "alreadyAccount": "Sie haben bereits ein Konto?",
+    "login": "Anmelden",
+    "checkEmailTitle": "Überprüfen Sie Ihre E-Mail",
+    "checkEmailMsg": "Eine Bestätigungs-E-Mail wurde an {{email}} gesendet. Bitte überprüfen Sie Ihren Posteingang (und Spam-Ordner), um Ihr Konto vor der Anmeldung zu bestätigen."
   }
 }

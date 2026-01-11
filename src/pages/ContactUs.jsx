@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaRegFileAlt } from "react-icons/fa";
 import heroBg from "../assets/Images/Contact/contact.jpg"; // replace with your image path
-import Navbar from "./Auth/Navigation";
 import Footer from "../components/Footer";
+import { useTranslation } from "react-i18next";
 
 const ContactUs = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,7 +16,6 @@ const ContactUs = () => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    // Trigger animation after component mounts
     setAnimate(true);
   }, []);
 
@@ -27,7 +27,7 @@ const ContactUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Contact Form Data:", formData);
-    alert("Your message has been sent!");
+    alert(t("contact.messageSent")); // i18n alert
   };
 
   return (
@@ -45,10 +45,10 @@ const ContactUs = () => {
         <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
         <div className="relative z-10 px-4">
           <h1 className="text-4xl md:text-5xl font-bold drop-shadow-lg">
-            Let’s Connect! Contact Us
+            {t("contact.heroTitle")}
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mt-2 drop-shadow">
-            We’re here to help you find or post jobs easily. You can either fill out our Google Job Posting Form or reach out via the contact details below.
+            {t("contact.heroSubtitle")}
           </p>
         </div>
       </div>
@@ -70,20 +70,20 @@ const ContactUs = () => {
               rel="noopener noreferrer"
               className="text-orange-500 font-semibold hover:underline"
             >
-              Post a Job via Google Form / Jobformular ausfüllen
+              {t("contact.googleFormLink")}
             </a>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-3 bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
             <div className="flex items-center gap-2">
-              <FaPhone className="text-orange-500" /> +49 157 83716538 whatsapp
+              <FaPhone className="text-orange-500" /> {t("contact.phone")}
             </div>
             <div className="flex items-center gap-2">
-              <FaEnvelope className="text-orange-500" /> contact@jobsperhourberlin.de
+              <FaEnvelope className="text-orange-500" /> {t("contact.email")}
             </div>
             <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-orange-500" /> Berlin, Germany
+              <FaMapMarkerAlt className="text-orange-500" /> {t("contact.address")}
             </div>
 
             {/* Google Map */}
@@ -94,7 +94,7 @@ const ContactUs = () => {
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
-                allowFullScreen=""
+                allowFullScreen
                 loading="lazy"
               ></iframe>
             </div>
@@ -107,12 +107,12 @@ const ContactUs = () => {
             animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-2xl font-bold text-orange-500 mb-4">Send a Message</h2>
+          <h2 className="text-2xl font-bold text-orange-500 mb-4">{t("contact.sendMessage")}</h2>
           <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="text"
               name="name"
-              placeholder="Your Name*"
+              placeholder={t("contact.placeholders.name")}
               value={formData.name}
               onChange={handleChange}
               required
@@ -121,7 +121,7 @@ const ContactUs = () => {
             <input
               type="email"
               name="email"
-              placeholder="Your Email*"
+              placeholder={t("contact.placeholders.email")}
               value={formData.email}
               onChange={handleChange}
               required
@@ -130,14 +130,14 @@ const ContactUs = () => {
             <input
               type="text"
               name="subject"
-              placeholder="Subject"
+              placeholder={t("contact.placeholders.subject")}
               value={formData.subject}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition"
             />
             <textarea
               name="message"
-              placeholder="Message"
+              placeholder={t("contact.placeholders.message")}
               value={formData.message}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded px-3 py-2 h-28 resize-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition"
@@ -146,12 +146,12 @@ const ContactUs = () => {
               type="submit"
               className="w-full py-2 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-semibold rounded hover:scale-105 hover:from-orange-500 hover:to-orange-600 transform transition"
             >
-              Send Message
+              {t("contact.sendButton")}
             </button>
           </form>
         </div>
       </div>
-   <Footer />
+      <Footer />
     </div>
   );
 };
