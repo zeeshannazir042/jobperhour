@@ -20,18 +20,18 @@ const JobCard = ({ job }) => {
           {job.image ? (
             <img
               src={job.image}
-              alt={job.title}
+              alt={job.title?.en || job.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
           ) : (
-            <div className="text-6xl animate-bounce-slow select-none">{job.emoji}</div>
+            <div className="text-6xl animate-bounce-slow select-none">{job.icon}</div>
           )}
         </div>
 
         {/* Job Info */}
         <div className="p-5 relative z-10">
           <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1 transition-colors group-hover:text-orange-500">
-            {job.title}
+            {job.title?.[i18n.language] || job.title?.en}
           </h3>
 
           {job.subtitle && (
@@ -68,9 +68,14 @@ const JobCard = ({ job }) => {
       {/* Help Popup */}
       {showHelp && category && (
         <HelpPopup
-          category={category}
-          lang={i18n.language} // pass selected language
           onClose={() => setShowHelp(false)}
+          data={{
+            title: category.title, // pass object directly
+            vocabulary: category.vocabulary || [],
+            phrases: category.phrases || [],
+          }}
+          lang={i18n.language}
+          type="job"
         />
       )}
 

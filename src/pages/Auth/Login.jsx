@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
-import pic from "../../assets/Images/signup/signup.jpg";
+import pic from "../../assets/Images/signup/signup.jpeg";
 import { useTranslation } from "react-i18next";
 
 const Login = () => {

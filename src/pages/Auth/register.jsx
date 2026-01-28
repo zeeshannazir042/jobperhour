@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { registerUser } from "../../api/userApi";
-import heroVideo from "../../../public/videos/video.mp4";
+import heropic from "../../assets/Images/signup/22.jpeg";
 import { useTranslation } from "react-i18next";
 
 const Register = () => {
@@ -97,9 +97,7 @@ const Register = () => {
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Video */}
       <div className="md:w-1/2 hidden md:flex relative overflow-hidden">
-        <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover transform scale-110 animate-parallax">
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        <img src={heropic} alt="  " />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
           <h1 className="text-white text-4xl font-bold text-center animate-fade-up">{t("register.welcomeTitle")}</h1>

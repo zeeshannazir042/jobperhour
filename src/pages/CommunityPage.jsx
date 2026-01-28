@@ -1,186 +1,220 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import HeroCommunity from "../components/community/HeroCommunity";
+import Footer from "../components/Footer";
+import HelpPopup from "../components/HelpPopup";
 import PostDetail from "../components/community/PostDetail";
 import PostForm from "../components/community/PostForm";
-import HeroCommunity from "../components/community/HeroCommunity";
-import { getAllPosts } from "../api/communityApi";
 import { useAuth } from "../context/AuthContext";
-import Footer from "../components/Footer";
 
-// Map keywords to icons dynamically
-const iconMap = {
-  furniture: "🛋️",
-  tech: "💻",
-  clothes: "👕",
-  kids: "🧸",
-  books: "📚",
-  home: "🎨",
-  sports: "🏋️",
-  garden: "🌱",
-  diy: "🛠️",
-  board: "🎮",
-  posters: "🖼️",
-  stationery: "🖊️",
-  musical: "🎵",
-  food: "🍴",
-  donation: "📦",
-  school: "🎓",
-  community: "🌳",
-  recycling: "♻️",
-  awareness: "🖼️",
-  cleaning: "🧹",
-  techHelp: "💻",
-  creative: "🎨",
-  tutoring: "📚",
-  event: "🎉",
-  idea: "💡",
-  skill: "🧵",
-  urban: "🌱",
-  history: "📖",
-  other: "✨",
+// ---------- HELP BUTTON ITEMS ----------
+const helpButtonItems = {
+  "Free Stuff": {
+    title: { en: "Free Stuff 🎁", de: "Kostenlos 🎁" },
+    items: {
+      "Furniture & Home Appliances": "🛋️",
+      "Tech Gadgets & Electronics": "💻",
+      "Clothes, Shoes & Accessories": "👕",
+      "Kids' Stuff, Toys & Baby Gear": "🧸",
+      "Books, Movies, Music & Games": "📚",
+      "Home Decor, Art & Crafts": "🎨",
+      "Sports, Fitness & Outdoor Gear": "🏋️",
+      "Garden Plants, Seeds & Supplies": "🌱",
+      "Building Materials & DIY Tools": "🛠️",
+      "Board Games & Hobby Kits": "🎮",
+      "Posters, Prints & Small Artwork": "🖼️",
+      "Stationery & Office Supplies": "🖊️",
+      "Musical Instruments (non-motorized)": "🎵",
+      "Other Free Stuff": "✨",
+    },
+    sdgs: {
+      "Furniture & Home Appliances": "SDG 12",
+      "Tech Gadgets & Electronics": "SDG 12",
+      "Clothes, Shoes & Accessories": "SDG 12",
+      "Kids' Stuff, Toys & Baby Gear": "SDG 12",
+      "Books, Movies, Music & Games": "SDG 4",
+      "Home Decor, Art & Crafts": "SDG 11",
+      "Sports, Fitness & Outdoor Gear": "SDG 3",
+      "Garden Plants, Seeds & Supplies": "SDG 15",
+      "Building Materials & DIY Tools": "SDG 12",
+      "Board Games & Hobby Kits": "SDG 4",
+      "Posters, Prints & Small Artwork": "SDG 11",
+      "Stationery & Office Supplies": "SDG 4",
+      "Musical Instruments (non-motorized)": "SDG 4",
+      "Other Free Stuff": "SDG 12",
+    },
+  },
+  Donations: {
+    title: { en: "Donations & Giving Back ❤️", de: "Spenden & Helfen ❤️" },
+    items: {
+      "Food & Supplies for Food Banks": "🍴",
+      "Clothing & Toy Drives": "✨",
+      "Support for Local Shelters (Animal/Homeless)": "🎨",
+      "School & Library Donations": "📦",
+      "Community Project Support (gardens, parks, murals, public space beautification)": "🌱",
+      "Donation Drives for NGOs": "📦",
+      "Book & Educational Material Donations": "📦",
+      "Recycling & Upcycling Projects for the community": "🌳",
+      "Public Awareness Campaigns (sustainability, literacy, social causes)": "🖼️",
+      "Other Donation Causes": "📦",
+    },
+    sdgs: {
+      "Food & Supplies for Food Banks": "SDG 2",
+      "Clothing & Toy Drives": "SDG 12",
+      "Support for Local Shelters (Animal/Homeless)": "SDG 11",
+      "School & Library Donations": "SDG 4",
+      "Community Project Support (gardens, parks, murals, public space beautification)": "SDG 11",
+      "Donation Drives for NGOs": "SDG 17",
+      "Book & Educational Material Donations": "SDG 4",
+      "Recycling & Upcycling Projects for the community": "SDG 12",
+      "Public Awareness Campaigns (sustainability, literacy, social causes)": "SDG 13",
+      "Other Donation Causes": "SDG 10",
+    },
+  },
+  "Help & Tasks": {
+    title: { en: "Help & Tasks 🤝", de: "Hilfe & Aufgaben 🤝" },
+    items: {
+      "Gardening & Yard Work": "🌱",
+      "Tech Help": "💻",
+      "Creative & Repair Skills": "🛠️",
+      "Cleaning & Organizing": "🧹",
+      "Assistance with Moving Small Items": "✨",
+      "Furniture Assembly & Repairs": "🛋️",
+      "Event Setup & Community Activities": "🌳",
+      "Tutoring & Homework Help": "🎨",
+      "Idea Sharing & Civic Initiatives": "🌳",
+      "Skill & Craft Circles": "🧵",
+      "Urban Gardening & Tree Planting": "🌱",
+      "Community Supply Libraries": "🌳",
+      "Local History & Heritage Projects": "🖼️",
+      "Other Help & Tasks": "✨",
+    },
+    sdgs: {},
+  },
+  Explore: {
+    title: { en: "Explore 🔍", de: "Entdecken 🔍" },
+    items: {
+      "Find Local Events": "🎉",
+      "Meet Neighbors": "🌳",
+      "Volunteer Opportunities": "🛠️",
+    },
+  },
+  Impact: {
+    title: { en: "Impact 🌟", de: "Wirkung 🌟" },
+    items: {
+      "Items Reused": { emoji: "♻️", sdg: "SDG 12", count: 1240 },
+      "Help Tasks Completed": { emoji: "🤝", sdg: "SDG 11", count: 680 },
+      "Donation Drives Supported": { emoji: "❤️", sdg: "SDG 10", count: 42 },
+      "Community Projects": { emoji: "🌱", sdg: "SDG 13", count: 18 },
+    },
+  },
 };
 
-const postTypes = [
-  { value: "", label: "All Types" },
-  { value: "offer", label: "Offer" },
-  { value: "request", label: "Request" },
+// ---------- QUICK HELP BUTTONS ----------
+const helpButtons = [
+  { label: "Explore" },
+  { label: "Free Stuff" },
+  { label: "Donations" },
+  { label: "Help & Tasks" },
+  { label: "Impact" },
 ];
 
-const categoryColors = {
-  "Free Stuff 🎁": "bg-yellow-100 text-yellow-800",
-  "Donations & Giving Back ❤️": "bg-pink-100 text-pink-700",
-  "Community & Events 🗓️": "bg-blue-100 text-blue-700",
-  "Skills & Knowledge Sharing 🧠": "bg-purple-100 text-purple-700",
-  "Food & Garden 🌱": "bg-green-100 text-green-700",
-};
-
+// ---------- COMMUNITY PAGE COMPONENT ----------
 const CommunityPage = () => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { user } = useAuth();
-  const [posts, setPosts] = useState([]);
+
+  const [activeHelpCategory, setActiveHelpCategory] = useState(null);
+  const [filters, setFilters] = useState({ category: "", type: "" });
   const [selectedPost, setSelectedPost] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const [filters, setFilters] = useState({ category: "", type: "" });
 
-  const fetchPosts = async () => {
-    try {
-      const data = await getAllPosts();
-      setPosts(data);
-      if (data.length > 0 && !selectedPost) setSelectedPost(data[0]);
-    } catch (err) {
-      console.error("Failed to fetch posts:", err);
-    }
+  // Placeholder data
+  const postTypes = [{ value: "offer", label: "Offer" }, { value: "request", label: "Request" }];
+  const filteredPosts = []; // Replace with API data
+  const categoryColors = {
+    "Free Stuff": "bg-green-100 text-green-800",
+    Donations: "bg-red-100 text-red-800",
+    "Help & Tasks": "bg-blue-100 text-blue-800",
   };
+const benefitsData = [
+  {
+    icon: "⭐", // optional icon
+    title: "Earn Community Trust",
+    description:
+      "Gain verified Community Points and Trust Badges by helping neighbors. Every successful exchange boosts your credibility within our network.",
+    color: "from-yellow-400 to-yellow-500",
+  },
+  {
+    icon: "💡",
+    title: "Forge Local Connections",
+    description:
+      "Meet like-minded neighbors in your Kiez. Share skills, lend resources, and build meaningful relationships that strengthen your local community.",
+    color: "from-pink-400 to-pink-500",
+  },
+  {
+    icon: "🌱",
+    title: "Promote Sustainability",
+    description:
+      "Minimize waste by sharing and reusing items. Contribute to a greener, more resourceful community.",
+    color: "from-green-400 to-green-500",
+  },
+];
+  const handleRefresh = () => {}; // Placeholder
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const handleRefresh = () => fetchPosts();
-
-  const filteredPosts = posts.filter((post) => {
-    const matchCategory = filters.category ? post.category === filters.category : true;
-    const matchType = filters.type ? post.type === filters.type : true;
-    return matchCategory && matchType;
-  });
-
-  // Build category cards from translation JSON
-  const categoryCards = Object.keys(t("categoryCards", { returnObjects: true })).map(
-    (key) => {
-      const data = t(`categoryCards.${key}`, { returnObjects: true });
-      const items = Object.keys(data.items).map((item) => {
-        // Determine icon
-        let icon = iconMap.other; // default
-        const lower = item.toLowerCase();
-        for (const k in iconMap) {
-          if (lower.includes(k)) {
-            icon = iconMap[k];
-            break;
-          }
-        }
-        return { text: data.items[item], icon };
-      });
-      return {
-        title: t(key),
-        description: data.description,
-        color: "bg-orange-500",
-        items,
-      };
-    }
-  );
-
-  const benefitsData = [
-    {
-      title: t("benefits.trust.title"),
-      description: t("benefits.trust.description"),
-      color: "from-orange-400 to-orange-600",
-      icon: "fa-solid fa-shield-check",
-    },
-    {
-      title: t("benefits.connections.title"),
-      description: t("benefits.connections.description"),
-      color: "from-orange-400 to-orange-600",
-      icon: "fa-solid fa-users",
-    },
-    {
-      title: t("benefits.sustainability.title"),
-      description: t("benefits.sustainability.description"),
-      color: "from-orange-400 to-orange-600",
-      icon: "fa-solid fa-leaf",
-    },
-  ];
+  // Map main categories to SDG badges
+  const mainCategorySDGs = {
+    "Free Stuff": "SDG 12",
+    Donations: "SDG 10",
+    "Help & Tasks": "SDG 11",
+    Impact: "SDG 13",
+  };
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
       <HeroCommunity />
 
-      {/* ---------- EXCHANGE CATEGORIES ---------- */}
-      <section className="max-w-7xl mx-auto py-24 px-6">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-gray-800 dark:text-gray-100">
-          {t("exchangeCategories")}
-        </h2>
-
-        <div className="grid gap-10 md:grid-cols-3">
-          {categoryCards.map((card) => (
+      {/* ---------- QUICK ACTION BUTTONS ---------- */}
+      <section className="bg-gray-50 dark:bg-gray-900 sticky top-0 z-30 py-6 shadow-md">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-4 px-4">
+          {helpButtons.map((btn, idx) => (
             <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-transform hover:shadow-2xl hover:-translate-y-1"
+              key={idx}
+              onClick={() =>
+                setActiveHelpCategory({
+                  ...helpButtonItems[btn.label],
+                  type: btn.label === "Impact" ? "impact" : "community",
+                })
+              }
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className={`relative flex flex-col items-center justify-center w-32 h-32 rounded-2xl shadow-lg cursor-pointer p-4 transition-all text-center ${
+                activeHelpCategory?.title?.en === helpButtonItems[btn.label]?.title?.en
+                  ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
+                  : "bg-orange-100 text-orange-800 hover:bg-orange-200"
+              }`}
             >
-              <div
-                className={`${card.color} text-white font-bold px-6 py-4 text-lg md:text-xl flex items-center justify-between`}
-              >
-                {card.title}
-                <motion.span
-                  className="ml-2"
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
+              <div className="text-4xl mb-2">
+                {btn.label === "Explore" && "🔍"}
+                {btn.label === "Free Stuff" && "🎁"}
+                {btn.label === "Donations" && "❤️"}
+                {btn.label === "Help & Tasks" && "🤝"}
+                {btn.label === "Impact" && "🌟"}
+              </div>
+              <div className="font-semibold text-sm md:text-base">{btn.label}</div>
+
+              {/* SDG Badge */}
+              {mainCategorySDGs[btn.label] && (
+                <a
+                  href="https://www.undp.org/sustainable-development-goals"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-2 right-2 px-2 py-1 text-xs rounded-full bg-green-500 text-white font-semibold hover:bg-green-600 transition-colors"
                 >
-                  🎉
-                </motion.span>
-              </div>
-              <div className="px-6 py-6 space-y-4">
-                <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
-                  {card.description}
-                </p>
-                <ul className="space-y-3">
-                  {card.items.map((item, idx) => (
-                    <li
-                      key={idx}
-                      className={`flex items-center gap-3 text-gray-700 dark:text-gray-200 ${
-                        item.bold ? "font-semibold" : "font-normal"
-                      }`}
-                    >
-                      <span className="text-orange-500 text-lg">{item.icon}</span>
-                      {item.text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  {mainCategorySDGs[btn.label]}
+                </a>
+              )}
             </motion.div>
           ))}
         </div>
@@ -360,6 +394,16 @@ const CommunityPage = () => {
             />
           </motion.div>
         </motion.div>
+      )}
+
+      {/* ---------- HELP POPUP ---------- */}
+      {activeHelpCategory && (
+        <HelpPopup
+          data={activeHelpCategory}
+          lang={i18n.language}
+          type={activeHelpCategory.type}
+          onClose={() => setActiveHelpCategory(null)}
+        />
       )}
 
       <Footer />
