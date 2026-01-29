@@ -60,7 +60,7 @@ const helpButtonItems = {
       "Other Donation Causes": "📦",
     },
     sdgs: {
-      "Food & Supplies for Food Banks": "SDG 2",
+      "Food & Supplies for Food Banks": "Your voluntary action supports: SDG 2",
       "Clothing & Toy Drives": "SDG 12",
       "Support for Local Shelters (Animal/Homeless)": "SDG 11",
       "School & Library Donations": "SDG 4",
@@ -92,14 +92,7 @@ const helpButtonItems = {
     },
     sdgs: {},
   },
-  Explore: {
-    title: { en: "Explore 🔍", de: "Entdecken 🔍" },
-    items: {
-      "Find Local Events": "🎉",
-      "Meet Neighbors": "🌳",
-      "Volunteer Opportunities": "🛠️",
-    },
-  },
+
   Impact: {
     title: { en: "Impact 🌟", de: "Wirkung 🌟" },
     items: {
@@ -113,7 +106,6 @@ const helpButtonItems = {
 
 // ---------- QUICK HELP BUTTONS ----------
 const helpButtons = [
-  { label: "Explore" },
   { label: "Free Stuff" },
   { label: "Donations" },
   { label: "Help & Tasks" },
@@ -196,7 +188,7 @@ const benefitsData = [
               }`}
             >
               <div className="text-4xl mb-2">
-                {btn.label === "Explore" && "🔍"}
+              
                 {btn.label === "Free Stuff" && "🎁"}
                 {btn.label === "Donations" && "❤️"}
                 {btn.label === "Help & Tasks" && "🤝"}

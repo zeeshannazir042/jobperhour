@@ -14,11 +14,11 @@
   },
   "hero": {
     "title": {
-      "before": "Explore",
-      "highlight": "Flexible Jobs",
+      "before": "Find local Tasks",
+      "highlight": "Opportunities",
       "after": "in Berlin"
     },
-    "subtitle": "Work on your terms. Connect with local employers. Get paid fast.",
+    "subtitle": "Connect your skills with neighbourhood needs. Set your terms. Get paid through secure escrow.",
     "browseJobs": "Browse Jobs",
     "postJob": "Post a Job"
   },

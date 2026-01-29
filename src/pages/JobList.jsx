@@ -409,24 +409,7 @@ const ComingSoon = () => {
         transition={{ delay: 1, duration: 1 }}
         className="grid grid-cols-4 gap-4 text-center mb-12"
       >
-        {labels.map((label, i) => (
-          <motion.div
-            key={i}
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: i * 0.2,
-            }}
-            className="bg-white/20 backdrop-blur-md rounded-xl p-4 min-w-[70px]"
-          >
-            <p className="text-3xl font-bold">
-              {Object.values(timeLeft)[i]}
-            </p>
-            <span className="text-sm uppercase">{label}</span>
-          </motion.div>
-        ))}
+       
       </motion.div>
 
       {/* Email */}

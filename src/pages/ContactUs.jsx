@@ -65,7 +65,7 @@ const ContactUs = () => {
           <div className="flex items-center gap-3 bg-white p-3 rounded-lg shadow hover:shadow-lg transition">
             <FaRegFileAlt className="text-orange-500 text-2xl" />
             <a
-              href="https://forms.gle/your-google-form-link"
+              href="https://forms.gle/qUGwQkTCkYjBesgi6"
               target="_blank"
               rel="noopener noreferrer"
               className="text-orange-500 font-semibold hover:underline"
