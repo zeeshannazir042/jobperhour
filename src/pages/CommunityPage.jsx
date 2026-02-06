@@ -119,10 +119,10 @@ const helpButtonItems = {
   Impact: {
     title: { en: "Impact 🌟", de: "Wirkung 🌟" },
     items: {
-      "Items Reused": { emoji: "♻️", sdg: "SDG 12", count: 1240 },
-      "Help Tasks Completed": { emoji: "🤝", sdg: "SDG 11", count: 680 },
-      "Donation Drives Supported": { emoji: "❤️", sdg: "SDG 10", count: 42 },
-      "Community Projects": { emoji: "🌱", sdg: "SDG 13", count: 18 }
+      "Items Reused": { emoji: "♻️", sdg: "SDG 12", count: 0 },
+      "Help Tasks Completed": { emoji: "🤝", sdg: "SDG 11", count: 0 },
+      "Donation Drives Supported": { emoji: "❤️", sdg: "SDG 10", count: 0 },
+      "Community Projects": { emoji: "🌱", sdg: "SDG 13", count: 0 }
     }
   }
 };
