@@ -1,6 +1,27 @@
 import React, { useState } from "react";
 import { FiX } from "react-icons/fi";
 
+// SDG Links Map
+const sdgLinks = {
+  "SDG 1": "https://sdgs.un.org/goals/goal1",
+  "SDG 2": "https://sdgs.un.org/goals/goal2",
+  "SDG 3": "https://sdgs.un.org/goals/goal3",
+  "SDG 4": "https://sdgs.un.org/goals/goal4",
+  "SDG 5": "https://sdgs.un.org/goals/goal5",
+  "SDG 6": "https://sdgs.un.org/goals/goal6",
+  "SDG 7": "https://sdgs.un.org/goals/goal7",
+  "SDG 8": "https://sdgs.un.org/goals/goal8",
+  "SDG 9": "https://sdgs.un.org/goals/goal9",
+  "SDG 10": "https://sdgs.un.org/goals/goal10",
+  "SDG 11": "https://sdgs.un.org/goals/goal11",
+  "SDG 12": "https://sdgs.un.org/goals/goal12",
+  "SDG 13": "https://sdgs.un.org/goals/goal13",
+  "SDG 14": "https://sdgs.un.org/goals/goal14",
+  "SDG 15": "https://sdgs.un.org/goals/goal15",
+  "SDG 16": "https://sdgs.un.org/goals/goal16",
+  "SDG 17": "https://sdgs.un.org/goals/goal17",
+};
+
 const HelpPopup = ({ onClose, data, lang = "en", type = "job" }) => {
   const [activeTab, setActiveTab] = useState("vocabulary");
 
@@ -111,15 +132,12 @@ const HelpPopup = ({ onClose, data, lang = "en", type = "job" }) => {
             </div>
           )}
 
-          {/* Community & Free Stuff / Donations / Help & Tasks */}
+          {/* Community / Free Stuff / Donations / Help & Tasks */}
           {(type === "community" || type === "freeStuff") && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {communityItems.map((item, idx) => (
-                <a
+                <div
                   key={idx}
-                  href="https://www.undp.org/sustainable-development-goals"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="p-4 bg-orange-100 dark:bg-orange-900 rounded-xl flex flex-col gap-2 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
@@ -128,42 +146,71 @@ const HelpPopup = ({ onClose, data, lang = "en", type = "job" }) => {
                       {item.text}
                     </span>
                   </div>
+                  {/* SDG badges */}
                   {item.sdg && (
-                    <span className="inline-block mt-1 px-2 py-1 text-xs font-semibold bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors">
-                      {item.sdg}
-                    </span>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {(Array.isArray(item.sdg) ? item.sdg : [item.sdg]).map(
+                        (sdg, i) => (
+                          <a
+                            key={i}
+                            href={sdgLinks[sdg]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block px-2 py-1 text-xs font-semibold bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
+                          >
+                            {sdg}
+                          </a>
+                        )
+                      )}
+                    </div>
                   )}
-                </a>
+                </div>
               ))}
             </div>
           )}
 
-          {/* Impact Mode */}
-          {type === "impact" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-              {impactItems.map((item, idx) => (
+         {/* Impact Mode */}
+{type === "impact" && (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+    {impactItems.map((item, idx) => (
+      <div
+        key={idx}
+        className="p-4 bg-orange-100 dark:bg-orange-900 rounded-xl flex flex-col gap-2 shadow-sm hover:shadow-md transition-shadow"
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">{item.emoji}</span>
+          <span className="font-semibold text-gray-800 dark:text-gray-100">
+            {item.text}
+          </span>
+        </div>
+
+        {item.sdg && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {(Array.isArray(item.sdg) ? item.sdg : [item.sdg]).map(
+              (sdg, i) => (
                 <a
-                  key={idx}
-                  href="https://www.undp.org/sustainable-development-goals"
+                  key={i}
+                  href={sdgLinks[sdg]}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 bg-orange-100 dark:bg-orange-900 rounded-xl flex flex-col gap-2 shadow-sm hover:shadow-md transition-shadow"
+                  className="inline-flex items-center gap-2 px-3 py-1 text-sm font-semibold bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{item.emoji}</span>
-                    <span className="font-semibold text-gray-800 dark:text-gray-100">
-                      {item.text}
-                    </span>
-                  </div>
-                  {item.sdg && (
-                    <span className="inline-block mt-1 px-2 py-1 text-xs font-semibold bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors">
-                      {item.sdg} {item.count ? `– ${item.count}` : ""}
+                  <span>{sdg}</span>
+                  {item.count && (
+                    <span className="bg-white text-green-600 font-bold px-2 py-0.5 rounded-full text-xs">
+                      {item.count}
                     </span>
                   )}
                 </a>
-              ))}
-            </div>
-          )}
+              )
+            )}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+)}
+
         </div>
 
         {/* Footer */}

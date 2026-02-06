@@ -10,8 +10,9 @@ import { useAuth } from "../context/AuthContext";
 
 // ---------- HELP BUTTON ITEMS ----------
 const helpButtonItems = {
-  "Free Stuff": {
+ "Free Stuff": {
     title: { en: "Free Stuff 🎁", de: "Kostenlos 🎁" },
+
     items: {
       "Furniture & Home Appliances": "🛋️",
       "Tech Gadgets & Electronics": "💻",
@@ -26,27 +27,30 @@ const helpButtonItems = {
       "Posters, Prints & Small Artwork": "🖼️",
       "Stationery & Office Supplies": "🖊️",
       "Musical Instruments (non-motorized)": "🎵",
-      "Other Free Stuff": "✨",
+      "Other Free Stuff": "✨"
     },
+
     sdgs: {
-      "Furniture & Home Appliances": "SDG 12",
-      "Tech Gadgets & Electronics": "SDG 12",
-      "Clothes, Shoes & Accessories": "SDG 12",
-      "Kids' Stuff, Toys & Baby Gear": "SDG 12",
-      "Books, Movies, Music & Games": "SDG 4",
-      "Home Decor, Art & Crafts": "SDG 11",
-      "Sports, Fitness & Outdoor Gear": "SDG 3",
-      "Garden Plants, Seeds & Supplies": "SDG 15",
-      "Building Materials & DIY Tools": "SDG 12",
-      "Board Games & Hobby Kits": "SDG 4",
-      "Posters, Prints & Small Artwork": "SDG 11",
-      "Stationery & Office Supplies": "SDG 4",
-      "Musical Instruments (non-motorized)": "SDG 4",
-      "Other Free Stuff": "SDG 12",
-    },
+      "Furniture & Home Appliances": ["SDG 12"],
+      "Tech Gadgets & Electronics": ["SDG 12"],
+      "Clothes, Shoes & Accessories": ["SDG 12"],
+      "Kids' Stuff, Toys & Baby Gear": ["SDG 4", "SDG 12"],
+      "Books, Movies, Music & Games": ["SDG 4"],
+      "Home Decor, Art & Crafts": ["SDG 11"],
+      "Sports, Fitness & Outdoor Gear": ["SDG 3"],
+      "Garden Plants, Seeds & Supplies": ["SDG 15"],
+      "Building Materials & DIY Tools": ["SDG 11", "SDG 12"],
+      "Board Games & Hobby Kits": ["SDG 4"],
+      "Posters, Prints & Small Artwork": ["SDG 11"],
+      "Stationery & Office Supplies": ["SDG 4"],
+      "Musical Instruments (non-motorized)": ["SDG 4"],
+      "Other Free Stuff": ["SDG 12"]
+    }
   },
+
   Donations: {
     title: { en: "Donations & Giving Back ❤️", de: "Spenden & Helfen ❤️" },
+
     items: {
       "Food & Supplies for Food Banks": "🍴",
       "Clothing & Toy Drives": "✨",
@@ -57,23 +61,26 @@ const helpButtonItems = {
       "Book & Educational Material Donations": "📦",
       "Recycling & Upcycling Projects for the community": "🌳",
       "Public Awareness Campaigns (sustainability, literacy, social causes)": "🖼️",
-      "Other Donation Causes": "📦",
+      "Other Donation Causes": "📦"
     },
+
     sdgs: {
-      "Food & Supplies for Food Banks": "Your voluntary action supports: SDG 2",
-      "Clothing & Toy Drives": "SDG 12",
-      "Support for Local Shelters (Animal/Homeless)": "SDG 11",
-      "School & Library Donations": "SDG 4",
-      "Community Project Support (gardens, parks, murals, public space beautification)": "SDG 11",
-      "Donation Drives for NGOs": "SDG 17",
-      "Book & Educational Material Donations": "SDG 4",
-      "Recycling & Upcycling Projects for the community": "SDG 12",
-      "Public Awareness Campaigns (sustainability, literacy, social causes)": "SDG 13",
-      "Other Donation Causes": "SDG 10",
-    },
+      "Food & Supplies for Food Banks": ["SDG 2"],
+      "Clothing & Toy Drives": ["SDG 12"],
+      "Support for Local Shelters (Animal/Homeless)": ["SDG 11"],
+      "School & Library Donations": ["SDG 4"],
+      "Community Project Support (gardens, parks, murals, public space beautification)": ["SDG 11"],
+      "Donation Drives for NGOs": ["SDG 17"],
+      "Book & Educational Material Donations": ["SDG 4"],
+      "Recycling & Upcycling Projects for the community": ["SDG 12", "SDG 13"],
+      "Public Awareness Campaigns (sustainability, literacy, social causes)": ["SDG 13", "SDG 4"],
+      "Other Donation Causes": ["SDG 10"]
+    }
   },
+
   "Help & Tasks": {
     title: { en: "Help & Tasks 🤝", de: "Hilfe & Aufgaben 🤝" },
+
     items: {
       "Gardening & Yard Work": "🌱",
       "Tech Help": "💻",
@@ -88,9 +95,25 @@ const helpButtonItems = {
       "Urban Gardening & Tree Planting": "🌱",
       "Community Supply Libraries": "🌳",
       "Local History & Heritage Projects": "🖼️",
-      "Other Help & Tasks": "✨",
+      "Other Help & Tasks": "✨"
     },
-    sdgs: {},
+
+    sdgs: {
+      "Gardening & Yard Work": ["SDG 15", "SDG 13"],
+      "Tech Help": ["SDG 4", "SDG 8"],
+      "Creative & Repair Skills": ["SDG 12", "SDG 8"],
+      "Cleaning & Organizing": ["SDG 11", "SDG 12"],
+      "Assistance with Moving Small Items": ["SDG 11"],
+      "Furniture Assembly & Repairs": ["SDG 12", "SDG 11"],
+      "Event Setup & Community Activities": ["SDG 11"],
+      "Tutoring & Homework Help": ["SDG 4"],
+      "Idea Sharing & Civic Initiatives": ["SDG 11"],
+      "Skill & Craft Circles": ["SDG 4", "SDG 8"],
+      "Urban Gardening & Tree Planting": ["SDG 13", "SDG 15"],
+      "Community Supply Libraries": ["SDG 12", "SDG 11"],
+      "Local History & Heritage Projects": ["SDG 11", "SDG 4"],
+      "Other Help & Tasks": ["SDG 11"]
+    }
   },
 
   Impact: {
@@ -99,9 +122,9 @@ const helpButtonItems = {
       "Items Reused": { emoji: "♻️", sdg: "SDG 12", count: 1240 },
       "Help Tasks Completed": { emoji: "🤝", sdg: "SDG 11", count: 680 },
       "Donation Drives Supported": { emoji: "❤️", sdg: "SDG 10", count: 42 },
-      "Community Projects": { emoji: "🌱", sdg: "SDG 13", count: 18 },
-    },
-  },
+      "Community Projects": { emoji: "🌱", sdg: "SDG 13", count: 18 }
+    }
+  }
 };
 
 // ---------- QUICK HELP BUTTONS ----------
