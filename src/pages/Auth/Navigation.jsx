@@ -225,62 +225,69 @@ const Navbar = () => {
       {/* MOBILE MENU */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3 }}
-            className={`fixed top-0 right-0 h-full w-72 z-50 ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-              }`}
-          >
-            <div className="p-5 flex justify-between border-b">
-              <img src={logo} className="h-10" />
-              <HiX
-                className="text-2xl cursor-pointer"
-                onClick={() => setMenuOpen(false)}
-              />
-            </div>
+         <motion.div
+  initial={{ x: "100%" }}
+  animate={{ x: 0 }}
+  exit={{ x: "100%" }}
+  transition={{ duration: 0.3 }}
+  className={`fixed top-0 right-0 h-full w-72 z-50 ${dark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}
+>
+  {/* Header with logo and close button */}
+  <div className="p-5 flex justify-between border-b">
+    <img src={logo} className="h-10" alt="Logo" />
+    <HiX
+      className="text-2xl cursor-pointer"
+      onClick={() => setMenuOpen(false)}
+    />
+  </div>
 
-            <ul className="p-5 space-y-4 text-lg">
-              <MobileLink to="/" label={t("nav.home")} close={setMenuOpen} />
-              <MobileLink to="/about" label={t("About Us") || "About"} close={setMenuOpen} />
-              <MobileLink to="/jobs" label={t("jobs")} close={setMenuOpen} />
-              <MobileLink to="/community" label={t("community")} close={setMenuOpen} />
-              {isJobPoster && (
-                <MobileLink to="/post-job" label={t("postJob")} close={setMenuOpen} />
-              )}
-              <MobileLink to="/contactUs" label={t("contactUs")} close={setMenuOpen} />
+  <ul className="p-5 space-y-4 text-lg">
+    {/* Navigation links */}
+    <MobileLink to="/" label={t("nav.home")} close={setMenuOpen} />
+    <MobileLink to="/about" label={t("nav.aboutUs")} close={setMenuOpen} />
+    <MobileLink to="/jobs" label={t("nav.jobs")} close={setMenuOpen} />
+    <MobileLink to="/community" label={t("nav.community")} close={setMenuOpen} />
+    
+    {isJobPoster && (
+      <MobileLink to="/post-job" label={t("nav.postJob")} close={setMenuOpen} />
+    )}
 
-              {user && (
-                <MobileLink
-                  to={getDashboardRoute()}
-                  label={t("Dashboard")}
-                  close={setMenuOpen}
-                />
-              )}
-              {!user && (
-                <>
-                  <MobileLink to="/login" label={t("login")} close={setMenuOpen} />
+    <MobileLink to="/contactUs" label={t("nav.contactUs")} close={setMenuOpen} />
 
-                  <Link
-                    to="/signup"
-                    onClick={() => setMenuOpen(false)}
-                    className="block text-center mt-2 px-4 py-2 bg-orange-500 text-white rounded-full"
-                  >
-                    {t("signup")}
-                  </Link>
-                </>
-              )}
-              {user && (
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-red-500 pt-4 border-t"
-                >
-                  <MdLogout /> {t("logout")}
-                </button>
-              )}
-            </ul>
-          </motion.div>
+    {/* User dashboard or login/signup */}
+    {user ? (
+      <>
+        <MobileLink
+          to={getDashboardRoute()}
+          label={t("nav.dashboard")}
+          close={setMenuOpen}
+        />
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 text-red-500 pt-4 border-t"
+        >
+          <MdLogout /> {t("nav.logout")}
+        </button>
+      </>
+    ) : (
+      <>
+        <MobileLink
+          to="/login"
+          label={t("login.loginButton")}
+          close={setMenuOpen}
+        />
+        <Link
+          to="/signup"
+          onClick={() => setMenuOpen(false)}
+          className="block text-center mt-2 px-4 py-2 bg-orange-500 text-white rounded-full"
+        >
+          {t("login.signUp")}
+        </Link>
+      </>
+    )}
+  </ul>
+</motion.div>
+
         )}
       </AnimatePresence>
     </>
